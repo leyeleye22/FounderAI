@@ -166,6 +166,36 @@ def write_metrics(path: Path, metrics: dict) -> None:
     path.write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def validate_saved_adapter(output_dir: Path) -> dict:
+    expected_any = [
+        output_dir / "adapter_model.safetensors",
+        output_dir / "adapter_model.bin",
+    ]
+    adapter_config = output_dir / "adapter_config.json"
+    tokenizer_config = output_dir / "tokenizer_config.json"
+    generated_files = sorted(path.name for path in output_dir.iterdir()) if output_dir.exists() else []
+
+    if not adapter_config.exists():
+        raise RuntimeError(
+            f"Training finished but adapter_config.json is missing in {output_dir}. Files found: {generated_files}"
+        )
+
+    if not any(path.exists() for path in expected_any):
+        raise RuntimeError(
+            f"Training finished but no adapter weights were saved in {output_dir}. Files found: {generated_files}"
+        )
+
+    if not tokenizer_config.exists():
+        raise RuntimeError(
+            f"Training finished but tokenizer_config.json is missing in {output_dir}. Files found: {generated_files}"
+        )
+
+    return {
+        "output_dir": str(output_dir),
+        "files": generated_files,
+    }
+
+
 def gpu_summary() -> dict:
     if not torch.cuda.is_available():
         return {"cuda": False}
@@ -245,6 +275,7 @@ def main() -> None:
     train_output = trainer.train(resume_from_checkpoint=last_checkpoint) if last_checkpoint else trainer.train()
     trainer.save_model(str(config.output_dir))
     tokenizer.save_pretrained(str(config.output_dir))
+    saved_adapter_manifest = validate_saved_adapter(config.output_dir)
 
     validation_metrics = trainer.evaluate(eval_dataset=validation_dataset, metric_key_prefix="validation")
     test_metrics = trainer.evaluate(eval_dataset=test_dataset, metric_key_prefix="test")
@@ -264,6 +295,7 @@ def main() -> None:
             "train_loss": train_output.metrics.get("train_loss"),
             "best_model_checkpoint": trainer.state.best_model_checkpoint,
             "resumed_from_checkpoint": last_checkpoint,
+            "saved_adapter_manifest": saved_adapter_manifest,
             **validation_metrics,
             **test_metrics,
         }
