@@ -13,8 +13,8 @@ def build_notebook() -> dict:
         "!pip install -q "
         "transformers>=4.51.0 peft>=0.10.0 accelerate>=0.28.0 bitsandbytes>=0.43.0 "
         "datasets>=2.18.0 trl>=0.8.0 torch>=2.2.0 sentencepiece>=0.2.0 protobuf>=4.25.0 "
-        "matplotlib>=3.8.0 fastapi==0.115.9 uvicorn[standard]==0.35.0 pydantic==2.11.7 "
-        "pydantic-settings==2.10.1 httpx==0.28.1 huggingface_hub>=0.34.0"
+        "matplotlib>=3.8.0 pydantic>=2.12.0,<3 pydantic-settings>=2.10.1 "
+        "httpx>=0.28.1 huggingface_hub>=0.34.0"
     )
 
     cells = [

@@ -225,6 +225,8 @@ Behavioral Colab eval flow:
 - it evaluates the freshly trained adapter against the scripted eval packs
 - it writes a consolidated summary and includes the main failures in the final report
 - the downloaded zip now contains both the adapter artifacts and the behavioral eval outputs
+- the notebook does not install `fastapi` or `uvicorn`, because they are not needed for the Colab train/eval flow
+- this avoids dependency conflicts with preinstalled Colab packages such as `google-adk`
 
 Main environment variables for the Colab script:
 
