@@ -1,0 +1,456 @@
+{
+  "summary": {
+    "total": 20,
+    "passed": 17,
+    "failed": 3,
+    "by_module": {
+      "problem-statement": {
+        "total": 2,
+        "passed": 1,
+        "failed": 1
+      },
+      "problem-validation": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0
+      },
+      "icp": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "business": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "gtm": {
+        "total": 3,
+        "passed": 1,
+        "failed": 2
+      },
+      "market-sizing": {
+        "total": 3,
+        "passed": 3,
+        "failed": 0
+      },
+      "roi": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "research": {
+        "total": 2,
+        "passed": 2,
+        "failed": 0
+      },
+      "journey": {
+        "total": 1,
+        "passed": 1,
+        "failed": 0
+      }
+    }
+  },
+  "results": [
+    {
+      "case_id": "problem_statement_vague_beginner",
+      "module_key": "problem-statement",
+      "locale": "fr",
+      "message": "Les gens ont un probleme",
+      "reply": "Envoie-moi ton probleme en une phrase simple, et je te dirai ce qui bloque puis je te proposerai une meilleure version.",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [],
+      "missing_expected": [
+        "trop large",
+        "qui exactement",
+        "combien"
+      ],
+      "forbidden_hits": [],
+      "passed": false
+    },
+    {
+      "case_id": "problem_statement_solution_first",
+      "module_key": "problem-statement",
+      "locale": "fr",
+      "message": "Je veux creer une application IA pour aider les commercants.",
+      "reply": "Tu pointes deja une solution. Reviens d abord sur la douleur du client.\nJe vois le point de depart. Voici comment le rendre plus clair.\nLe vrai manque maintenant, c est plutot :\n- dans quel moment concret le probleme apparait\n- a quelle frequence cela se produit\n- quel impact reel cela cree",
+      "action_types": [
+        "apply_fields",
+        "quick_prompt",
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "solution",
+        "douleur"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "problem_validation_no_evidence",
+      "module_key": "problem-validation",
+      "locale": "fr",
+      "message": "Je n'ai pas encore fait d'interviews. Est-ce que mon probleme est valide ?",
+      "reply": "**Validation : Aucune evidence terrain**\n\nTu n'as pas encore de preuves terrain. Avant de dire que ton probleme est valide, il te faut des interviews reels.\n\n**Questions a te poser maintenant :**\n- Combien de personnes as-tu interviewees?\n- Qu'ont-elles confirme sur le probleme?\n- Qu'utilisent-elles comme solution actuelle?\n\n**Prochain test :** Interviewe 5-10 personnes de ta cible cette semaine. Pas des amis ou de la famille. Demande-leur de te decrire leur probleme en detail.",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "preuves terrain",
+        "interviews reels",
+        "5-10"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "problem_validation_weak_evidence",
+      "module_key": "problem-validation",
+      "locale": "fr",
+      "message": "J'ai parle a 3 amis et 2 membres de ma famille. Ils disent que c'est une bonne idee.",
+      "reply": "**Validation : Evidence faible (amis/famille)**\n\nTu as commence a parler a des gens, mais les preuves sont faibles.\n\n**Attention aux biais :**\n- Les amis et la famille disent toujours oui (biais de complaisance)\n- Il te faut des clients potentiels reels\n\n**Questions pour aller plus loin :**\n- As-tu interviewe des clients potentiels reels (pas des proches)?\n- Peux-tu me donner des chiffres concrets (temps, argent, frequence)?\n- Ont-ils mentionne une solution actuelle qu'ils paient deja?",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "preuves sont faibles",
+        "amis",
+        "clients potentiels reels"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "problem_validation_good_evidence",
+      "module_key": "problem-validation",
+      "locale": "fr",
+      "message": "J'ai interviewe 12 commercants et 8 ont confirme qu'ils perdent du temps. 5 paient deja un bricolage.",
+      "reply": "**Validation : Evidence solide**\n\nTon probleme est solidement valide !\n\n**Ce qui est fort :**\n- 12 interviews confirmees avec des commercants de Sandaga.\n- Ils confirment perdre 2 a 3 heures par jour.\n- 5 paient deja un service manuel ou un assistant pour suivre le stock.\n\n**Prochaines etapes :**\n1. Page ICP : Definir ton client ideal avec precision\n2. Page BMC : Construire ton modele autour du prix valide\n3. Page GTM : Planifier comment atteindre tes 10 premiers clients",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "solidement valide",
+        "icp",
+        "bmc",
+        "gtm"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "icp_too_broad_b2b_geo",
+      "module_key": "icp",
+      "locale": "fr",
+      "message": "Mon ICP ce sont les PME et commercants en Afrique.",
+      "reply": "C'est beaucoup trop large. 'Tout le monde' = personne en particulier.\n\n**Pourquoi c'est un probleme :**\n- Tu melanges des profils, contextes, budgets et urgences tres differents\n- Tu apprendras trop lentement si ta cible est definie par un pays ou un continent entier\n- Tu ne peux pas construire un produit pour 'tout le monde'\n\n**Version de depart plus actionnable :**\n- un profil precis\n- dans une ville ou zone precise\n- avec une douleur observable\n- dans un moment d'usage clair\n\n**Exemple B2B :** grossistes ou PME de distribution a Dakar qui vendent a credit et subissent des retards de paiement recurrents.\n\n**Questions a trancher maintenant :**\n- Quel sous-segment souffre le plus ?\n- Quel contexte rend la douleur urgente ?\n- Qui decide, qui paie et qui utilise ?\n",
+      "action_types": [
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "beaucoup trop large",
+        "tout le monde",
+        "sous-segment"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "icp_refinement_good_start",
+      "module_key": "icp",
+      "locale": "fr",
+      "message": "Mon ICP ce sont les restaurateurs de quartier a Dakar qui gerent encore leurs commandes sur WhatsApp.",
+      "reply": "Ton ICP a un bon debut. Voici comment le rendre encore plus actionnable :\n\n- **Segment**: Restaurateurs de quartier a Dakar\n\n**Ce qui manque peut-etre :**\n- Age precis (tranche d'age)\n- Localisation exacte (ville, quartier)\n- Budget maximum pour une solution\n- Canal de communication prefer\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "bon debut",
+        "budget maximum",
+        "canal de communication"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "business_segment_incoherence_students",
+      "module_key": "business",
+      "locale": "fr",
+      "message": "Customer segment: les ecoles",
+      "reply": "Suivant le probleme que tu as defini (eleves et reseaux sociaux), 'les ecoles' n'est pas le meilleur customer segment. Voici pourquoi :\n\n**POURQUOI 'ECOLES' N'EST PAS OPTIMAL :**\n- Le probleme est vecu par les **eleves** a la maison, pas a l'ecole\n- Les ecoles ont un processus d'achat long (decisions bureaucratiques)\n- Le probleme de temps d'ecran se passe en dehors des heures de cours\n\n**SEGMENT PLUS JUDICIEUX :** Les **parents d'eleves de 13 a 20 ans** a Dakar.\n\n**POURQUOI :**\n- Ce sont les parents qui paient pour des solutions educatives\n- Ils ressentent la douleur indirectement (notes en baisse, conflits familiaux)\n- Ils ont le pouvoir de decision et le budget\n- Ils cherchent activement des solutions\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "pas optimal",
+        "parents d'eleves",
+        "pouvoir de decision"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "business_missing_blocks",
+      "module_key": "business",
+      "locale": "fr",
+      "message": "Aide-moi a remplir mon BMC.",
+      "reply": "Voici les blocs qui manquent et des pistes pour les remplir :\n\n**Channels (Canaux) :** Comment tu atteins tes clients\n**Customer-Relationships :** Comment tu les gardes\n**Revenue-Streams :** Abonnement, setup, formation\n**Key-Resources :** Equipe tech, infrastructure\n**Key-Activities :** Dev produit, acquisition, support\n**Key-Partnerships :** Associations, fournisseurs\n**Cost-Structure :** Salaires, cloud, marketing\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "blocs qui manquent",
+        "channels",
+        "revenue-streams"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "gtm_feature_first",
+      "module_key": "gtm",
+      "locale": "fr",
+      "message": "Mon application a beaucoup de fonctionnalites. Comment faire mon lancement ?",
+      "reply": "Voici un plan GTM en 3 phases :\n\n**PHASE 1 : Pre-Launch (Semaines 1-4)**\n- Valider l'interet avec 10-10 contacts\n- Demo personnalisee de 15 min\n- Feedback sur 3 fonctionnalites cles\n\n**PHASE 2 : Launch (Semaines 5-8)**\n- 30 clients payants\n- Offre lancement : -30% pendant 3 mois\n- Partnership avec associations\n\n**PHASE 3 : Post-Launch (Semaines 9-16)**\n- 100 clients, churn < 5%\n- Programme referral : 1 mois gratuit par parrainage\n- Expansion vers d'autres villes\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "client"
+      ],
+      "missing_expected": [
+        "produit",
+        "petit segment"
+      ],
+      "forbidden_hits": [
+        "phase 1"
+      ],
+      "passed": false
+    },
+    {
+      "case_id": "gtm_channel_choice_without_icp",
+      "module_key": "gtm",
+      "locale": "fr",
+      "message": "Je veux faire des campagnes Facebook et Instagram pour lancer mon produit.",
+      "reply": "Tu commences par le produit, pas par le marche. Un bon go-to-market part d'abord du client, du probleme urgent, puis du canal.\n\n**Avant de parler lancement, clarifie ceci :**\n- Qui souffre le plus du probleme ?\n- Quelle douleur precise veux-tu resoudre en premier ?\n- Quel petit segment peux-tu atteindre cette semaine ?\n- Quelle promesse simple peux-tu tester sans construire 10 fonctionnalites ?\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [],
+      "missing_expected": [
+        "avant de choisir tes canaux",
+        "whatsapp",
+        "valide d'abord ton icp"
+      ],
+      "forbidden_hits": [],
+      "passed": false
+    },
+    {
+      "case_id": "gtm_three_phase_plan",
+      "module_key": "gtm",
+      "locale": "fr",
+      "message": "Peux-tu me proposer un plan GTM simple pour mes 3 premiers mois ?",
+      "reply": "Voici un plan GTM en 3 phases :\n\n**PHASE 1 : Pre-Launch (Semaines 1-4)**\n- Valider l'interet avec 10-10 contacts\n- Demo personnalisee de 15 min\n- Feedback sur 3 fonctionnalites cles\n\n**PHASE 2 : Launch (Semaines 5-8)**\n- 30 clients payants\n- Offre lancement : -30% pendant 3 mois\n- Partnership avec associations\n\n**PHASE 3 : Post-Launch (Semaines 9-16)**\n- 100 clients, churn < 5%\n- Programme referral : 1 mois gratuit par parrainage\n- Expansion vers d'autres villes\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "phase 1",
+        "phase 2",
+        "phase 3"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "market_sizing_before_validation",
+      "module_key": "market-sizing",
+      "locale": "fr",
+      "message": "Je veux calculer mon TAM avant meme de valider le probleme.",
+      "reply": "Tu vas trop vite. Avant de calculer TAM/SAM/SOM, il faut d'abord verifier que le probleme est reel, urgent, et assez douloureux pour une cible precise.\n\n**Ordre recommande :**\n1. Valider le probleme avec des interviews\n2. Definir un ICP assez etroit\n3. Valider une willingness-to-pay ou une urgence claire\n4. Ensuite seulement calculer TAM, SAM et SOM\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "tu vas trop vite",
+        "ordre recommande",
+        "valider le probleme"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "market_sizing_top_down",
+      "module_key": "market-sizing",
+      "locale": "fr",
+      "message": "Le marche africain vaut des milliards. Je veux faire un calcul top-down.",
+      "reply": "Attention au top-down ! Le marche 'africain' ou 'mondial' ne veut rien dire pour ton business.\n\n**Utilise la methode BOTTOM-UP :**\n1. Compte le nombre REEL de clients potentiels\n2. Multiplie par le prix qu'ils paient\n3. Applique des filtres progressifs (geo, budget, conscience du probleme)\n\n**TAM** = Tous les clients potentiels x prix\n**SAM** = Clients dans ta zone geographique x prix\n**SOM** = Clients que tu peux toucher en 2-3 ans x prix\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "attention au top-down",
+        "bottom-up",
+        "tam"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "market_sizing_bottom_up",
+      "module_key": "market-sizing",
+      "locale": "fr",
+      "message": "Explique-moi la methode bottom-up pour calculer mon TAM, SAM et SOM.",
+      "reply": "Voici le calcul bottom-up :\n\n**TAM** = Tous les clients potentiels au pays x prix annuel\n**SAM** = Clients dans ta ville/region x prix annuel\n**SOM** = 0.5-2% du SAM (scenario realiste en 2-3 ans) x prix annuel\n\n**HYPOTHESES A VALIDER :**\n- Nombre reel de clients (verifier avec sources officielles)\n- Pourcentage pret a payer (verifier par interviews)\n- Prix valide par willingness-to-pay interviews\n",
+      "action_types": [
+        "quick_prompt",
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "calcul bottom-up",
+        "som",
+        "hypotheses a valider"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "roi_unfounded_big_claim",
+      "module_key": "roi",
+      "locale": "fr",
+      "message": "Mon client aura 500% de ROI en 6 mois.",
+      "reply": "Ce chiffre doit etre justifie. Sur quoi est-il base ?\n\n**QUESTIONS A TE POSER :**\n1. **Formule utilisee** : ROI = (Gain - Investissement) / Investissement\n2. **Hypotheses** : Nombre de clients? Base sur combien d'interviews?\n3. **Prix** : Valide par des willingness-to-pay interviews?\n4. **Pourquoi 6 mois?** : Quel precedent montre ce resultat?\n\n**RECOMMANDATION :** Commence par un ROI conservateur base sur des donnees reelles.\nUn ROI de 200% base sur des donnees reelles vaut mieux qu'un ROI de 500% base sur des suppositions.\n",
+      "action_types": [
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "doit etre justifie",
+        "formule",
+        "conservateur"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "roi_grounded_framework",
+      "module_key": "roi",
+      "locale": "fr",
+      "message": "Aide-moi a calculer un ROI concret pour mes clients.",
+      "reply": "Voici comment calculer le ROI concret pour ton client :\n\n**HYPOTHESES DE BASE :**\n- Cout de ta solution\n- Temps economise par le client\n- Reduction d'erreurs ou de pertes\n\n**FORMULE :** ROI = (Gain - Cout) / Cout\n**PAYBACK :** Combien de mois pour recuperer l'investissement?\n",
+      "action_types": [
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "calculer le roi concret",
+        "formule",
+        "payback"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "research_signal_extraction",
+      "module_key": "research",
+      "locale": "fr",
+      "message": "Comment extraire les signaux forts de mes interviews et retours clients ?",
+      "reply": "Voici comment extraire les signaux de tes interviews :\n\n**PAIN POINTS :** Cherche les phrases avec emotion forte (frustration, colere, resignation)\n**WILLINGNESS TO PAY :** Cherche les chiffres concrets ('je paierais X', 'ca me coute Y')\n**BUYING SIGNALS :** Cherche les conditions precises ('si ca fait X je suis interesse')\n**OBJECTIONS :** Cherche les refus ('c'est cher', 'j'ai pas besoin', 'Excel me suffit')\n\n**SIGNAUX FORTS :** Douleur quantifiee + condition d'achat precise + solutions actuelles insatisfaisantes\n",
+      "action_types": [
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "extraire les signaux",
+        "pain points",
+        "buying signals"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "research_interview_framework",
+      "module_key": "research",
+      "locale": "fr",
+      "message": "Prepare-moi une structure d'interview pour valider un probleme.",
+      "reply": "Voici le framework pour une interview efficace :\n\n**PREPARATION (15 min) :**\n1. Objectif clair : Valider que [profil] souffre de [probleme]\n2. Hypotheses a tester : Ils perdent X, utilisent Y, pret a payer Z\n\n**STRUCTURE (30-45 min) :**\n- Introduction (3 min) : 'Je ne vends rien, je cherche a comprendre'\n- Contexte (5 min) : 'Parle-moi de ton activite'\n- Exploration probleme (15 min) : 'Qu'est-ce qui te prend le plus de temps?'\n- Validation solution (10 min) : 'Si une solution existait, qu'est-ce qu'elle devrait faire?'\n- Conclusion (2 min) : 'Y a-t-il d'autres personnes qui vivent la meme chose?'\n",
+      "action_types": [
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "framework pour une interview efficace",
+        "preparation",
+        "structure"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    },
+    {
+      "case_id": "journey_baseline_framework",
+      "module_key": "journey",
+      "locale": "fr",
+      "message": "Aide-moi a cartographier le parcours de mon client.",
+      "reply": "Voici le parcours complet de ton client ideal :\n\n**PHASE 1 : AWARENESS** - Decouverte du probleme\n**PHASE 2 : CONSIDERATION** - Recherche de solutions\n**PHASE 3 : PURCHASE** - Decision d'achat\n**PHASE 4 : RETENTION** - Utilisation quotidienne\n**PHASE 5 : ADVOCACY** - Recommandation\n\n**METRIQUES PAR PHASE :**\n- Awareness : Reach, mentions\n- Consideration : Taux reponse demo → inscription (objectif : 40%)\n- Purchase : Conversion essai → payant (objectif : 60%)\n- Retention : Churn mensuel (objectif : < 5%)\n- Advocacy : NPS (objectif : > 40), referrals/mois\n",
+      "action_types": [
+        "quick_prompt"
+      ],
+      "supporting_context_count": 3,
+      "expected_hits": [
+        "awareness",
+        "consideration",
+        "retention"
+      ],
+      "missing_expected": [],
+      "forbidden_hits": [],
+      "passed": true
+    }
+  ]
+}

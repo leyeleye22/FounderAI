@@ -1,0 +1,268 @@
+[
+  {
+    "id": "problem_statement_vague_beginner",
+    "module_key": "problem-statement",
+    "label": "Problem Statement",
+    "locale": "fr",
+    "message": "Les gens ont un probleme",
+    "filled_fields": [],
+    "empty_fields": ["problemStatement", "who", "when", "howOften", "cost"],
+    "expected_signals": ["trop large", "qui exactement", "combien"],
+    "forbidden_signals": ["version proposee"]
+  },
+  {
+    "id": "problem_statement_solution_first",
+    "module_key": "problem-statement",
+    "label": "Problem Statement",
+    "locale": "fr",
+    "message": "Je veux creer une application IA pour aider les commercants.",
+    "filled_fields": [],
+    "empty_fields": ["problemStatement", "who", "when", "howOften", "cost"],
+    "expected_signals": ["solution", "douleur"],
+    "forbidden_signals": ["parfait"]
+  },
+  {
+    "id": "problem_validation_no_evidence",
+    "module_key": "problem-validation",
+    "label": "Problem Validation",
+    "locale": "fr",
+    "message": "Je n'ai pas encore fait d'interviews. Est-ce que mon probleme est valide ?",
+    "filled_fields": [],
+    "empty_fields": ["evidence", "interviews", "signals"],
+    "expected_signals": ["preuves terrain", "interviews reels", "5-10"],
+    "forbidden_signals": ["solidement valide"]
+  },
+  {
+    "id": "problem_validation_weak_evidence",
+    "module_key": "problem-validation",
+    "label": "Problem Validation",
+    "locale": "fr",
+    "message": "J'ai parle a 3 amis et 2 membres de ma famille. Ils disent que c'est une bonne idee.",
+    "filled_fields": [
+      {
+        "field_name": "evidence_summary",
+        "label": "Evidence",
+        "is_filled": true,
+        "content": "J'ai eu 5 retours, surtout amis, famille et proches."
+      }
+    ],
+    "empty_fields": ["proof", "pricing"],
+    "expected_signals": ["preuves sont faibles", "amis", "clients potentiels reels"],
+    "forbidden_signals": ["solidement valide"]
+  },
+  {
+    "id": "problem_validation_good_evidence",
+    "module_key": "problem-validation",
+    "label": "Problem Validation",
+    "locale": "fr",
+    "message": "J'ai interviewe 12 commercants et 8 ont confirme qu'ils perdent du temps. 5 paient deja un bricolage.",
+    "filled_fields": [
+      {
+        "field_name": "interviews",
+        "label": "Interviews",
+        "is_filled": true,
+        "content": "12 interviews confirmees avec des commercants de Sandaga."
+      },
+      {
+        "field_name": "proof",
+        "label": "Proof",
+        "is_filled": true,
+        "content": "Ils confirment perdre 2 a 3 heures par jour."
+      },
+      {
+        "field_name": "payment",
+        "label": "Payment",
+        "is_filled": true,
+        "content": "5 paient deja un service manuel ou un assistant pour suivre le stock."
+      }
+    ],
+    "empty_fields": [],
+    "expected_signals": ["solidement valide", "icp", "bmc", "gtm"],
+    "forbidden_signals": ["preuves faibles"]
+  },
+  {
+    "id": "icp_too_broad_b2b_geo",
+    "module_key": "icp",
+    "label": "ICP",
+    "locale": "fr",
+    "message": "Mon ICP ce sont les PME et commercants en Afrique.",
+    "filled_fields": [],
+    "empty_fields": ["segment", "geo", "budget"],
+    "expected_signals": ["beaucoup trop large", "tout le monde", "sous-segment"],
+    "forbidden_signals": ["bon debut"]
+  },
+  {
+    "id": "icp_refinement_good_start",
+    "module_key": "icp",
+    "label": "ICP",
+    "locale": "fr",
+    "message": "Mon ICP ce sont les restaurateurs de quartier a Dakar qui gerent encore leurs commandes sur WhatsApp.",
+    "filled_fields": [
+      {
+        "field_name": "segment",
+        "label": "Segment",
+        "is_filled": true,
+        "content": "Restaurateurs de quartier a Dakar"
+      }
+    ],
+    "empty_fields": ["budget", "channel"],
+    "expected_signals": ["bon debut", "budget maximum", "canal de communication"],
+    "forbidden_signals": ["beaucoup trop large"]
+  },
+  {
+    "id": "business_segment_incoherence_students",
+    "module_key": "business",
+    "label": "Business Model Canvas",
+    "locale": "fr",
+    "message": "Customer segment: les ecoles",
+    "filled_fields": [
+      {
+        "field_name": "problemStatement",
+        "label": "Problem Statement",
+        "is_filled": true,
+        "content": "Les eleves passent trop de temps sur les reseaux sociaux le soir et les parents perdent le controle."
+      },
+      {
+        "field_name": "who",
+        "label": "Who",
+        "is_filled": true,
+        "content": "Eleves de 13 a 20 ans et leurs parents"
+      }
+    ],
+    "empty_fields": ["revenue_streams", "channels"],
+    "expected_signals": ["pas optimal", "parents d'eleves", "pouvoir de decision"],
+    "forbidden_signals": ["blocs qui manquent"]
+  },
+  {
+    "id": "business_missing_blocks",
+    "module_key": "business",
+    "label": "Business Model Canvas",
+    "locale": "fr",
+    "message": "Aide-moi a remplir mon BMC.",
+    "filled_fields": [],
+    "empty_fields": ["channels", "customer_relationships", "revenue_streams", "key_resources"],
+    "expected_signals": ["blocs qui manquent", "channels", "revenue-streams"],
+    "forbidden_signals": ["pas optimal"]
+  },
+  {
+    "id": "gtm_feature_first",
+    "module_key": "gtm",
+    "label": "Go To Market",
+    "locale": "fr",
+    "message": "Mon application a beaucoup de fonctionnalites. Comment faire mon lancement ?",
+    "filled_fields": [],
+    "empty_fields": ["segment", "channel"],
+    "expected_signals": ["produit", "client", "petit segment"],
+    "forbidden_signals": ["phase 1"]
+  },
+  {
+    "id": "gtm_channel_choice_without_icp",
+    "module_key": "gtm",
+    "label": "Go To Market",
+    "locale": "fr",
+    "message": "Je veux faire des campagnes Facebook et Instagram pour lancer mon produit.",
+    "filled_fields": [],
+    "empty_fields": ["icp", "channel_validation"],
+    "expected_signals": ["avant de choisir tes canaux", "whatsapp", "valide d'abord ton icp"],
+    "forbidden_signals": ["phase 1"]
+  },
+  {
+    "id": "gtm_three_phase_plan",
+    "module_key": "gtm",
+    "label": "Go To Market",
+    "locale": "fr",
+    "message": "Peux-tu me proposer un plan GTM simple pour mes 3 premiers mois ?",
+    "filled_fields": [],
+    "empty_fields": ["launch_plan"],
+    "expected_signals": ["phase 1", "phase 2", "phase 3"],
+    "forbidden_signals": ["avant de choisir tes canaux"]
+  },
+  {
+    "id": "market_sizing_before_validation",
+    "module_key": "market-sizing",
+    "label": "Market Sizing",
+    "locale": "fr",
+    "message": "Je veux calculer mon TAM avant meme de valider le probleme.",
+    "filled_fields": [],
+    "empty_fields": ["tam", "sam", "som"],
+    "expected_signals": ["tu vas trop vite", "ordre recommande", "valider le probleme"],
+    "forbidden_signals": ["bottom-up"]
+  },
+  {
+    "id": "market_sizing_top_down",
+    "module_key": "market-sizing",
+    "label": "Market Sizing",
+    "locale": "fr",
+    "message": "Le marche africain vaut des milliards. Je veux faire un calcul top-down.",
+    "filled_fields": [],
+    "empty_fields": ["tam", "sam", "som"],
+    "expected_signals": ["attention au top-down", "bottom-up", "tam"],
+    "forbidden_signals": ["tu vas trop vite"]
+  },
+  {
+    "id": "market_sizing_bottom_up",
+    "module_key": "market-sizing",
+    "label": "Market Sizing",
+    "locale": "fr",
+    "message": "Explique-moi la methode bottom-up pour calculer mon TAM, SAM et SOM.",
+    "filled_fields": [],
+    "empty_fields": ["tam", "sam", "som"],
+    "expected_signals": ["calcul bottom-up", "som", "hypotheses a valider"],
+    "forbidden_signals": ["attention au top-down"]
+  },
+  {
+    "id": "roi_unfounded_big_claim",
+    "module_key": "roi",
+    "label": "ROI",
+    "locale": "fr",
+    "message": "Mon client aura 500% de ROI en 6 mois.",
+    "filled_fields": [],
+    "empty_fields": ["assumptions", "payback"],
+    "expected_signals": ["doit etre justifie", "formule", "conservateur"],
+    "forbidden_signals": ["voici comment calculer le roi concret"]
+  },
+  {
+    "id": "roi_grounded_framework",
+    "module_key": "roi",
+    "label": "ROI",
+    "locale": "fr",
+    "message": "Aide-moi a calculer un ROI concret pour mes clients.",
+    "filled_fields": [],
+    "empty_fields": ["assumptions", "payback"],
+    "expected_signals": ["calculer le roi concret", "formule", "payback"],
+    "forbidden_signals": ["doit etre justifie"]
+  },
+  {
+    "id": "research_signal_extraction",
+    "module_key": "research",
+    "label": "Research",
+    "locale": "fr",
+    "message": "Comment extraire les signaux forts de mes interviews et retours clients ?",
+    "filled_fields": [],
+    "empty_fields": ["signals", "objections"],
+    "expected_signals": ["extraire les signaux", "pain points", "buying signals"],
+    "forbidden_signals": ["framework pour une interview efficace"]
+  },
+  {
+    "id": "research_interview_framework",
+    "module_key": "research",
+    "label": "Research",
+    "locale": "fr",
+    "message": "Prepare-moi une structure d'interview pour valider un probleme.",
+    "filled_fields": [],
+    "empty_fields": ["script", "hypotheses"],
+    "expected_signals": ["framework pour une interview efficace", "preparation", "structure"],
+    "forbidden_signals": ["pain points"]
+  },
+  {
+    "id": "journey_baseline_framework",
+    "module_key": "journey",
+    "label": "User Journey",
+    "locale": "fr",
+    "message": "Aide-moi a cartographier le parcours de mon client.",
+    "filled_fields": [],
+    "empty_fields": ["awareness", "purchase", "retention"],
+    "expected_signals": ["awareness", "consideration", "retention"],
+    "forbidden_signals": ["framework pour une interview efficace"]
+  }
+]

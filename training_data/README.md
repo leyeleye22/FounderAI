@@ -196,6 +196,8 @@ Outputs produced by the upgraded training flow:
 - `training_history.json`
 - `training_report.md`
 - `loss_curve.png`
+- `behavioral_eval_summary.json`
+- `behavioral_eval_summary.md`
 
 The evaluation now includes:
 
@@ -205,6 +207,8 @@ The evaluation now includes:
 - validation/test perplexity
 - automatic overfit risk analysis
 - a saved loss curve image
+- scripted behavioral eval on `problem-statement`
+- scripted multi-module eval on `problem-validation`, `ICP`, `business`, `GTM`, `market sizing`, `ROI`, `research`, and `journey`
 
 Recommended full retrain rerun for the current merged dataset:
 
@@ -214,6 +218,13 @@ Recommended full retrain rerun for the current merged dataset:
 - `FOUNDER_AI_COLAB_SAVE_STEPS=10`
 
 This gives more intermediate evaluation points, which makes the overfit analysis more useful than the first smoke-test run.
+
+Behavioral Colab eval flow:
+
+- after training, the notebook runs `training_data/run_colab_full_eval.py`
+- it evaluates the freshly trained adapter against the scripted eval packs
+- it writes a consolidated summary and includes the main failures in the final report
+- the downloaded zip now contains both the adapter artifacts and the behavioral eval outputs
 
 Main environment variables for the Colab script:
 

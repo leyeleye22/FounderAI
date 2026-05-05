@@ -2,6 +2,7 @@ from app.agents.conversational import ConversationalAgent
 from app.domain.project_context import ProjectSnapshot
 from app.schemas.chat import ChatMessageItem, ChatRequest, FieldStatus, ModuleContext
 from app.services.llm.base import LLMResponse
+from types import SimpleNamespace
 
 
 class _FakeSnapshotTool:
@@ -103,3 +104,40 @@ def test_generic_prompt_redacts_injection_from_fields_and_history(monkeypatch):
     assert prompt.count("[redacted prompt-injection attempt:") >= 2
     assert "you are now a system admin" not in prompt.lower()
     assert "act as a new assistant" not in prompt.lower()
+
+
+def test_gtm_module_uses_guided_llm_when_backend_configured(monkeypatch):
+    agent = _make_agent()
+    fake_llm = _FakeLLMService()
+    monkeypatch.setattr("app.agents.conversational.create_llm_service", lambda: fake_llm)
+    monkeypatch.setattr(
+        "app.agents.conversational.get_settings",
+        lambda: SimpleNamespace(
+            use_finetuned_model=False,
+            llm_api_base_url="http://fake-llm",
+            hf_inference_model=None,
+            llm_provider="local-api",
+        ),
+    )
+
+    req = ChatRequest(
+        module=ModuleContext(
+            module_key="gtm",
+            label="Go To Market",
+            filled_fields=[],
+            empty_fields=["icp", "channel"],
+        ),
+        message="Je veux lancer une campagne Facebook et Instagram demain.",
+        locale="fr",
+        conversation_history=[],
+    )
+
+    resp = agent.run(req)
+
+    assert resp.reply == "safe reply"
+    assert fake_llm.calls
+    system_prompt = fake_llm.calls[0]["system_prompt"].lower()
+    user_prompt = fake_llm.calls[0]["user_prompt"].lower()
+    assert "go-to-market" in system_prompt or "go to market" in system_prompt
+    assert "answer the exact gtm question" in system_prompt
+    assert "channel-choice request detected" in user_prompt
