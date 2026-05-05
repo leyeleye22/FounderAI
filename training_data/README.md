@@ -155,6 +155,7 @@ Current repairs cover:
 If your local PC does not have enough GPU or RAM, use the Colab notebook:
 
 - `training_data/founderai_colab_free_v1.ipynb`
+- `training_data/founderai_colab_train_eval_v2.ipynb`
 
 What this setup changes compared with the local script:
 
@@ -188,6 +189,22 @@ Entry point used by the notebook:
 ```bash
 python training_data/train_qwen3_lora_colab.py
 ```
+
+Outputs produced by the upgraded training flow:
+
+- `training_metrics.json`
+- `training_history.json`
+- `training_report.md`
+- `loss_curve.png`
+
+The evaluation now includes:
+
+- train loss
+- validation loss
+- test loss
+- validation/test perplexity
+- automatic overfit risk analysis
+- a saved loss curve image
 
 Main environment variables for the Colab script:
 

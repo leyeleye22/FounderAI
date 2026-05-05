@@ -11,6 +11,7 @@ This script is tuned for Google Colab free/limited GPU sessions:
 from __future__ import annotations
 
 import json
+import math
 import os
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
@@ -32,6 +33,11 @@ try:
     from .finetune_utils import add_perplexity, dataset_stats, load_jsonl_records, prepare_split_dataset, split_records
 except ImportError:
     from finetune_utils import add_perplexity, dataset_stats, load_jsonl_records, prepare_split_dataset, split_records
+
+try:
+    import matplotlib.pyplot as plt
+except ImportError:  # pragma: no cover - optional in some environments
+    plt = None
 
 
 def _repo_root() -> Path:
@@ -72,6 +78,9 @@ class ColabTrainingConfig:
     data_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_DATA_PATH", _repo_root() / "training_data" / "teranga_merged.jsonl"))
     output_dir: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_OUTPUT_DIR", Path("/content/founderai-colab-v1/lora_adapter")))
     metrics_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_METRICS_PATH", Path("/content/founderai-colab-v1/lora_adapter/training_metrics.json")))
+    history_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_HISTORY_PATH", Path("/content/founderai-colab-v1/lora_adapter/training_history.json")))
+    report_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_REPORT_PATH", Path("/content/founderai-colab-v1/lora_adapter/training_report.md")))
+    plot_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_PLOT_PATH", Path("/content/founderai-colab-v1/lora_adapter/loss_curve.png")))
     sample_limit: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_SAMPLE_LIMIT", 0))
 
     lora_r: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_LORA_R", 8))
@@ -177,6 +186,165 @@ def write_metrics(path: Path, metrics: dict) -> None:
     path.write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
+def extract_history(log_history: list[dict]) -> dict[str, list[dict[str, float]]]:
+    train_points: list[dict[str, float]] = []
+    eval_points: list[dict[str, float]] = []
+
+    for entry in log_history:
+        if "loss" in entry and "eval_loss" not in entry:
+            train_points.append(
+                {
+                    "step": float(entry.get("step", len(train_points) + 1)),
+                    "loss": float(entry["loss"]),
+                    "learning_rate": float(entry.get("learning_rate", 0.0)),
+                    "epoch": float(entry.get("epoch", 0.0)),
+                }
+            )
+        if "eval_loss" in entry:
+            eval_points.append(
+                {
+                    "step": float(entry.get("step", len(eval_points) + 1)),
+                    "eval_loss": float(entry["eval_loss"]),
+                    "epoch": float(entry.get("epoch", 0.0)),
+                }
+            )
+
+    return {"train": train_points, "eval": eval_points}
+
+
+def summarize_overfit(*, history: dict[str, list[dict[str, float]]], train_loss: float | None, validation_loss: float | None, test_loss: float | None) -> dict:
+    eval_points = history.get("eval", [])
+    train_points = history.get("train", [])
+    reasons: list[str] = []
+
+    best_eval_loss = None
+    best_eval_step = None
+    final_eval_loss = validation_loss
+    overfit_risk = "low"
+
+    def bump_risk(level: str) -> None:
+        nonlocal overfit_risk
+        order = {"low": 0, "medium": 1, "high": 2}
+        if order[level] > order[overfit_risk]:
+            overfit_risk = level
+
+    if eval_points:
+        best_point = min(eval_points, key=lambda item: item["eval_loss"])
+        best_eval_loss = best_point["eval_loss"]
+        best_eval_step = best_point["step"]
+        if final_eval_loss is None:
+            final_eval_loss = eval_points[-1]["eval_loss"]
+
+    if best_eval_loss is not None and final_eval_loss is not None:
+        drift = final_eval_loss - best_eval_loss
+        drift_ratio = drift / max(best_eval_loss, 1e-8)
+        if drift_ratio > 0.10:
+            bump_risk("high")
+            reasons.append("final validation loss is more than 10% worse than the best validation loss")
+        elif drift_ratio > 0.04:
+            bump_risk("medium")
+            reasons.append("final validation loss is meaningfully above the best validation loss")
+
+    if len(eval_points) >= 3:
+        last_eval_losses = [point["eval_loss"] for point in eval_points[-3:]]
+        if last_eval_losses[0] < last_eval_losses[1] < last_eval_losses[2]:
+            bump_risk("high" if overfit_risk == "medium" else "medium")
+            reasons.append("validation loss increased for the last three evaluation points")
+
+    if train_loss is not None and validation_loss is not None:
+        gap = validation_loss - train_loss
+        if gap > 0.75:
+            bump_risk("high")
+            reasons.append("generalization gap between train and validation loss is large")
+        elif gap > 0.35:
+            bump_risk("medium")
+            reasons.append("validation loss is noticeably above train loss")
+
+    if test_loss is not None and validation_loss is not None:
+        test_gap = test_loss - validation_loss
+        if test_gap > 0.25:
+            bump_risk("medium")
+            reasons.append("test loss is worse than validation loss")
+
+    if not reasons:
+        reasons.append("no strong overfitting signal detected from the available loss curves")
+
+    return {
+        "risk_level": overfit_risk,
+        "best_validation_loss": best_eval_loss,
+        "best_validation_step": best_eval_step,
+        "final_validation_loss": final_eval_loss,
+        "train_loss": train_loss,
+        "validation_loss": validation_loss,
+        "test_loss": test_loss,
+        "reasons": reasons,
+        "train_points": len(train_points),
+        "eval_points": len(eval_points),
+    }
+
+
+def write_report(path: Path, *, metrics: dict, overfit_summary: dict) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    lines = [
+        "# FounderAI Colab Training Report",
+        "",
+        "## Summary",
+        "",
+        f"- Base model: `{metrics['config']['base_model_id']}`",
+        f"- Train loss: `{metrics.get('train_loss')}`",
+        f"- Validation loss: `{metrics.get('validation_loss')}`",
+        f"- Test loss: `{metrics.get('test_loss')}`",
+        f"- Validation perplexity: `{metrics.get('validation_perplexity')}`",
+        f"- Test perplexity: `{metrics.get('test_perplexity')}`",
+        f"- Overfit risk: `{overfit_summary['risk_level']}`",
+        "",
+        "## Overfit analysis",
+        "",
+    ]
+    for reason in overfit_summary["reasons"]:
+        lines.append(f"- {reason}")
+
+    lines.extend(
+        [
+            "",
+            "## Curve checkpoints",
+            "",
+            f"- Best validation loss: `{overfit_summary.get('best_validation_loss')}`",
+            f"- Best validation step: `{overfit_summary.get('best_validation_step')}`",
+            f"- Final validation loss: `{overfit_summary.get('final_validation_loss')}`",
+            f"- Logged train points: `{overfit_summary.get('train_points')}`",
+            f"- Logged eval points: `{overfit_summary.get('eval_points')}`",
+        ]
+    )
+    path.write_text("\n".join(lines), encoding="utf-8")
+
+
+def plot_history(path: Path, history: dict[str, list[dict[str, float]]]) -> str | None:
+    if plt is None:
+        return None
+
+    train_points = history.get("train", [])
+    eval_points = history.get("eval", [])
+    if not train_points and not eval_points:
+        return None
+
+    path.parent.mkdir(parents=True, exist_ok=True)
+    plt.figure(figsize=(8, 5))
+    if train_points:
+        plt.plot([point["step"] for point in train_points], [point["loss"] for point in train_points], label="train_loss")
+    if eval_points:
+        plt.plot([point["step"] for point in eval_points], [point["eval_loss"] for point in eval_points], marker="o", label="validation_loss")
+    plt.xlabel("Step")
+    plt.ylabel("Loss")
+    plt.title("FounderAI Colab loss curves")
+    plt.legend()
+    plt.grid(alpha=0.25)
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
+    return str(path)
+
+
 def validate_saved_adapter(output_dir: Path) -> dict:
     expected_any = [
         output_dir / "adapter_model.safetensors",
@@ -231,7 +399,24 @@ def main() -> None:
             "No GPU detected. In Colab, switch to Runtime > Change runtime type > T4 GPU before launching training."
         )
 
-    print(json.dumps({"gpu": gpu_summary(), "config": {**asdict(config), "data_path": str(config.data_path), "output_dir": str(config.output_dir), "metrics_path": str(config.metrics_path)}}, ensure_ascii=False, indent=2))
+    print(
+        json.dumps(
+            {
+                "gpu": gpu_summary(),
+                "config": {
+                    **asdict(config),
+                    "data_path": str(config.data_path),
+                    "output_dir": str(config.output_dir),
+                    "metrics_path": str(config.metrics_path),
+                    "history_path": str(config.history_path),
+                    "report_path": str(config.report_path),
+                    "plot_path": str(config.plot_path),
+                },
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
 
     model, tokenizer = load_model_and_tokenizer(config)
     model.print_trainable_parameters()
@@ -293,6 +478,15 @@ def main() -> None:
 
     validation_metrics = trainer.evaluate(eval_dataset=validation_dataset, metric_key_prefix="validation")
     test_metrics = trainer.evaluate(eval_dataset=test_dataset, metric_key_prefix="test")
+    history = extract_history(trainer.state.log_history)
+    write_metrics(config.history_path, history)
+    overfit_summary = summarize_overfit(
+        history=history,
+        train_loss=train_output.metrics.get("train_loss"),
+        validation_loss=validation_metrics.get("validation_loss"),
+        test_loss=test_metrics.get("test_loss"),
+    )
+    plot_file = plot_history(config.plot_path, history)
 
     metrics = add_perplexity(
         {
@@ -301,6 +495,9 @@ def main() -> None:
                 "data_path": str(config.data_path),
                 "output_dir": str(config.output_dir),
                 "metrics_path": str(config.metrics_path),
+                "history_path": str(config.history_path),
+                "report_path": str(config.report_path),
+                "plot_path": str(config.plot_path),
             },
             "gpu": gpu_summary(),
             "train_runtime_seconds": train_output.metrics.get("train_runtime"),
@@ -310,11 +507,15 @@ def main() -> None:
             "best_model_checkpoint": trainer.state.best_model_checkpoint,
             "resumed_from_checkpoint": last_checkpoint,
             "saved_adapter_manifest": saved_adapter_manifest,
+            "training_history": history,
+            "overfit_analysis": overfit_summary,
+            "loss_curve_path": plot_file,
             **validation_metrics,
             **test_metrics,
         }
     )
     write_metrics(config.metrics_path, metrics)
+    write_report(config.report_path, metrics=metrics, overfit_summary=overfit_summary)
 
     print("Colab training complete.")
     print(json.dumps(metrics, ensure_ascii=False, indent=2))
