@@ -161,8 +161,9 @@ What this setup changes compared with the local script:
 - uses a Hugging Face model id instead of a local Windows path
 - uses 4-bit QLoRA by default
 - uses a shorter sequence length (`512`) to fit smaller Colab GPUs
-- writes checkpoints and metrics to Google Drive
+- writes checkpoints and metrics to local Colab storage by default
 - resumes automatically from the latest checkpoint if the session was interrupted
+- packages the adapter as a zip at the end of the notebook run
 
 Recommended first pass on Colab free:
 
@@ -206,7 +207,7 @@ Notes for Colab free:
 - runtime availability is dynamic
 - GPU access is not guaranteed
 - sessions can terminate early
-- that is why Drive-based checkpoints matter for this workflow
+- the notebook is optimized for a quick first run without extra setup
 
 ### 4. Merge Adapter (Optional)
 

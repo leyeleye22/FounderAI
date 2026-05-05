@@ -5,7 +5,7 @@ This script is tuned for Google Colab free/limited GPU sessions:
 - 4-bit QLoRA by default
 - shorter context windows to fit smaller GPUs
 - resumable checkpoints
-- Drive-friendly output paths
+- Colab-local output paths by default
 """
 
 from __future__ import annotations
@@ -60,8 +60,8 @@ def _env_float(name: str, default: float) -> float:
 class ColabTrainingConfig:
     base_model_id: str = field(default_factory=lambda: os.getenv("FOUNDER_AI_COLAB_BASE_MODEL", "Qwen/Qwen3-4B"))
     data_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_DATA_PATH", _repo_root() / "training_data" / "teranga_merged.jsonl"))
-    output_dir: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_OUTPUT_DIR", Path("/content/drive/MyDrive/founderai-colab/lora_adapter")))
-    metrics_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_METRICS_PATH", Path("/content/drive/MyDrive/founderai-colab/lora_adapter/training_metrics.json")))
+    output_dir: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_OUTPUT_DIR", Path("/content/founderai-colab-v1/lora_adapter")))
+    metrics_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_METRICS_PATH", Path("/content/founderai-colab-v1/lora_adapter/training_metrics.json")))
     sample_limit: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_SAMPLE_LIMIT", 0))
 
     lora_r: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_LORA_R", 8))
