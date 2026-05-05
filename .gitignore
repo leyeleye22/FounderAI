@@ -54,3 +54,5 @@ merges.txt
 # Deployment-local storage
 data/
 models/
+
+.vercel
