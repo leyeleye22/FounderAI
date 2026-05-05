@@ -228,6 +228,7 @@ Behavioral Colab eval flow:
 - the downloaded zip now contains both the adapter artifacts and the behavioral eval outputs
 - the notebook does not install `fastapi` or `uvicorn`, because they are not needed for the Colab train/eval flow
 - this avoids dependency conflicts with preinstalled Colab packages such as `google-adk`
+- on reruns, the notebook now force-refreshes the repo in Colab with `git fetch` + `git reset --hard origin/main`
 
 Main environment variables for the Colab script:
 

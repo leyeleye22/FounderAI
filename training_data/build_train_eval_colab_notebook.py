@@ -56,6 +56,8 @@ def build_notebook() -> dict:
                 "    subprocess.run(['git', 'clone', REPO_URL, str(RUN_ROOT)], check=True)\n",
                 "else:\n",
                 "    print('Repo already present at', RUN_ROOT)\n",
+                "    subprocess.run(['git', '-C', str(RUN_ROOT), 'fetch', 'origin'], check=True)\n",
+                "    subprocess.run(['git', '-C', str(RUN_ROOT), 'reset', '--hard', 'origin/main'], check=True)\n",
                 "\n",
                 "OUTPUT_DIR = RUN_ROOT / 'colab_outputs' / 'lora_adapter'\n",
                 "OUTPUT_DIR.mkdir(parents=True, exist_ok=True)\n",
