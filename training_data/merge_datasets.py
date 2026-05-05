@@ -8,13 +8,14 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from collections import Counter
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parent
 WORKSPACE_ROOT = ROOT.parent
-EXTERNAL_DATA_ROOT = Path(r"C:\Users\Mr LEYE\Downloads\DataSet Project help")
+EXTERNAL_DATA_ROOT = Path(os.getenv("FOUNDER_AI_EXTERNAL_DATA_ROOT", str(WORKSPACE_ROOT.parent / "DataSet Project help")))
 VENTURE_JSONL_PATH = EXTERNAL_DATA_ROOT / "venture_discovery_training_dataset.jsonl"
 TERANGA_PATH = ROOT / "teranga_finetune_advanced.jsonl"
 BEHAVIOR_REPAIR_PATH = ROOT / "behavior_repair_dataset.jsonl"

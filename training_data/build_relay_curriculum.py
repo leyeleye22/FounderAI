@@ -19,6 +19,14 @@ except ImportError:
     from finetune_utils import build_record_profiles, dataset_stats, load_jsonl_records
 
 
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def _training_root() -> Path:
+    return _repo_root() / "training_data"
+
+
 TRAIN_TASKS_STAGE_1 = {
     "problem_statement_generation",
     "problem_statement_rewrite",
@@ -37,9 +45,9 @@ TRAIN_TASKS_STAGE_2 = {
 
 @dataclass
 class CurriculumConfig:
-    data_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\teranga_merged.jsonl")
-    analysis_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\relay_dataset_analysis.json")
-    curriculum_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\relay_curriculum.json")
+    data_path: Path = _training_root() / "teranga_merged.jsonl"
+    analysis_path: Path = _training_root() / "relay_dataset_analysis.json"
+    curriculum_path: Path = _training_root() / "relay_curriculum.json"
     stage_1_shard_size: int = 8
     stage_2_shard_size: int = 6
     stage_3_shard_size: int = 4

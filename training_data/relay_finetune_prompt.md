@@ -8,13 +8,13 @@ Utilise ce prompt pour demander a un agent IA de gerer proprement le train et le
 Tu es un ML engineer senior charge du fine-tuning de FounderAI.
 
 Contexte machine et contraintes:
-- Workspace principal: C:\Users\Mr LEYE\Downloads\FounderAI
-- Base model FP32: C:\Users\Mr LEYE\Downloads\FounderAI\base_model_fp32
-- Dataset merge: C:\Users\Mr LEYE\Downloads\FounderAI\training_data\teranga_merged.jsonl
-- Corpus de repair: C:\Users\Mr LEYE\Downloads\FounderAI\training_data\behavior_repair_dataset.jsonl
-- Curriculum relay: C:\Users\Mr LEYE\Downloads\FounderAI\training_data\relay_curriculum.json
-- Trainer relay: C:\Users\Mr LEYE\Downloads\FounderAI\training_data\relay_train_qwen3_lora.py
-- Sortie adapter active: C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter_relay
+- Workspace principal: ./ 
+- Base model FP32: ./base_model_fp32
+- Dataset merge: ./training_data/teranga_merged.jsonl
+- Corpus de repair: ./training_data/behavior_repair_dataset.jsonl
+- Curriculum relay: ./training_data/relay_curriculum.json
+- Trainer relay: ./training_data/relay_train_qwen3_lora.py
+- Sortie adapter active: ./lora_adapter_relay
 - La machine est CPU-only ou tres contrainte. Un full train classique n'est pas acceptable.
 
 Objectif:

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -36,22 +37,30 @@ except ImportError:
     )
 
 
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def _training_root() -> Path:
+    return _repo_root() / "training_data"
+
+
 @dataclass
 class TrainingConfig:
     base_model_path: str = field(
-        default=r"C:\Users\Mr LEYE\Downloads\FounderAI\base_model_fp32",
+        default=os.getenv("FOUNDER_AI_BASE_MODEL_PATH", str(_repo_root() / "base_model_fp32")),
         metadata={"help": "Path to the base Qwen3 model"}
     )
     data_path: str = field(
-        default=r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\teranga_merged.jsonl",
+        default=os.getenv("FOUNDER_AI_DATA_PATH", str(_training_root() / "teranga_merged.jsonl")),
         metadata={"help": "Path to the merged JSONL file"}
     )
     output_dir: str = field(
-        default=r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter",
+        default=os.getenv("FOUNDER_AI_OUTPUT_DIR", str(_repo_root() / "lora_adapter")),
         metadata={"help": "Directory to save the LoRA adapter"}
     )
     metrics_path: str = field(
-        default=r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter\training_metrics.json",
+        default=os.getenv("FOUNDER_AI_METRICS_PATH", str(_repo_root() / "lora_adapter" / "training_metrics.json")),
         metadata={"help": "Path to write training metrics"}
     )
 

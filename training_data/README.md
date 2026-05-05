@@ -62,15 +62,15 @@ python train_qwen3_lora.py
 ```
 
 The training script will:
-1. Load the Qwen3 FP32 training base model from `C:/Users/Mr LEYE/Downloads/FounderAI/base_model_fp32`
+1. Load the Qwen3 FP32 training base model from `./base_model_fp32`
 2. Load the training dataset
 3. Apply LoRA configuration (r=16, alpha=32)
 4. Train for 3 epochs with batch size 1, gradient accumulation 8
-5. Save the LoRA adapter to `C:/Users/Mr LEYE/Downloads/FounderAI/lora_adapter`
+5. Save the LoRA adapter to `./lora_adapter`
 
 Note:
-- `C:/Users/Mr LEYE/Downloads/FounderAI` remains the main app/inference workspace.
-- `C:/Users/Mr LEYE/Downloads/FounderAI/base_model_fp32` is the local FP32 training copy derived from the quantized base model.
+- `./` remains the main app/inference workspace.
+- `./base_model_fp32` is the local FP32 training copy derived from the quantized base model.
 
 ### 3b. Relay Training for Weak Machines
 
@@ -214,7 +214,7 @@ Notes for Colab free:
 python merge_lora.py
 ```
 
-This creates a standalone merged model at `C:/Users/Mr LEYE/Downloads/FounderAI/teranga-qwen3-merged`.
+This creates a standalone merged model at `./teranga-qwen3-merged`.
 
 ## Integration with FounderAI Backend
 
@@ -222,8 +222,8 @@ After training, enable the fine-tuned model by updating the `.env` file:
 
 ```env
 USE_FINETUNED_MODEL=true
-FINETUNED_MODEL_PATH=C:\Users\Mr LEYE\Downloads\FounderAI
-LORA_ADAPTER_PATH=C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter
+FINETUNED_MODEL_PATH=.
+LORA_ADAPTER_PATH=./lora_adapter
 ```
 
 The backend will automatically:

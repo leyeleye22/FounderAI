@@ -7,17 +7,22 @@ Usage:
 """
 
 import argparse
+from pathlib import Path
 
 import torch
 from peft import PeftModel
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
 def main():
     parser = argparse.ArgumentParser(description="Merge LoRA adapter with base model")
-    parser.add_argument("--base_model", type=str, default="C:/Users/Mr LEYE/Downloads/FounderAI/base_model_fp32")
-    parser.add_argument("--lora_adapter", type=str, default="C:/Users/Mr LEYE/Downloads/FounderAI/lora_adapter")
-    parser.add_argument("--output", type=str, default="C:/Users/Mr LEYE/Downloads/FounderAI/teranga-qwen3-merged")
+    parser.add_argument("--base_model", type=str, default=str(_repo_root() / "base_model_fp32"))
+    parser.add_argument("--lora_adapter", type=str, default=str(_repo_root() / "lora_adapter"))
+    parser.add_argument("--output", type=str, default=str(_repo_root() / "teranga-qwen3-merged"))
     args = parser.parse_args()
 
     print(f"Loading base model from {args.base_model}...")

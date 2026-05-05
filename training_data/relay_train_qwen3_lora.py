@@ -24,16 +24,24 @@ except ImportError:
     from finetune_utils import add_perplexity, load_jsonl_records, prepare_split_dataset
 
 
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def _training_root() -> Path:
+    return _repo_root() / "training_data"
+
+
 @dataclass
 class RelayConfig:
-    base_model_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\base_model_fp32")
-    data_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\teranga_merged.jsonl")
-    curriculum_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\relay_curriculum.json")
-    curriculum_analysis_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\relay_dataset_analysis.json")
-    output_dir: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter_relay")
-    state_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter_relay\relay_state.json")
-    history_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter_relay\relay_history.json")
-    full_eval_path: Path = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter_relay\full_eval_metrics.json")
+    base_model_path: Path = Path(os.getenv("FOUNDER_AI_BASE_MODEL_PATH", str(_repo_root() / "base_model_fp32")))
+    data_path: Path = Path(os.getenv("FOUNDER_AI_DATA_PATH", str(_training_root() / "teranga_merged.jsonl")))
+    curriculum_path: Path = Path(os.getenv("FOUNDER_AI_RELAY_CURRICULUM_PATH", str(_training_root() / "relay_curriculum.json")))
+    curriculum_analysis_path: Path = Path(os.getenv("FOUNDER_AI_RELAY_ANALYSIS_PATH", str(_training_root() / "relay_dataset_analysis.json")))
+    output_dir: Path = Path(os.getenv("FOUNDER_AI_RELAY_OUTPUT_DIR", str(_repo_root() / "lora_adapter_relay")))
+    state_path: Path = Path(os.getenv("FOUNDER_AI_RELAY_STATE_PATH", str(_repo_root() / "lora_adapter_relay" / "relay_state.json")))
+    history_path: Path = Path(os.getenv("FOUNDER_AI_RELAY_HISTORY_PATH", str(_repo_root() / "lora_adapter_relay" / "relay_history.json")))
+    full_eval_path: Path = Path(os.getenv("FOUNDER_AI_RELAY_FULL_EVAL_PATH", str(_repo_root() / "lora_adapter_relay" / "full_eval_metrics.json")))
     learning_rate: float = 2e-4
     warmup_ratio: float = 0.03
     weight_decay: float = 0.01

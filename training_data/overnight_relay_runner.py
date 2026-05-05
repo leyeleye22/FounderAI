@@ -58,7 +58,7 @@ class RunnerConfig:
 
 
 def parse_args() -> RunnerConfig:
-    workspace_root = Path(r"C:\Users\Mr LEYE\Downloads\FounderAI")
+    workspace_root = Path(os.getenv("FOUNDER_AI_WORKSPACE_ROOT", str(Path(__file__).resolve().parents[1])))
     parser = argparse.ArgumentParser(description="Overnight relay runner for CPU-friendly LoRA training")
     parser.add_argument("--start-hour", type=int, default=22, help="Local hour when the overnight window starts")
     parser.add_argument("--end-hour", type=int, default=6, help="Local hour when the overnight window ends")

@@ -1,7 +1,8 @@
 """Enrich behavior_repair_dataset.jsonl with generic repair examples covering missing patterns."""
 import json
+from pathlib import Path
 
-OUTPUT = r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\behavior_repair_dataset.jsonl"
+OUTPUT = str(Path(__file__).resolve().parent / "behavior_repair_dataset.jsonl")
 
 SYSTEM = (
     "Tu es le copilot de Teranga Power, un assistant IA pour fondateurs africains. "

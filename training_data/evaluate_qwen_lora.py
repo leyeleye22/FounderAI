@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -28,12 +29,20 @@ except ImportError:
     )
 
 
+def _repo_root() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def _training_root() -> Path:
+    return _repo_root() / "training_data"
+
+
 @dataclass
 class EvaluationConfig:
-    base_model_path: str = field(default=r"C:\Users\Mr LEYE\Downloads\FounderAI\base_model_fp32")
-    adapter_path: str = field(default=r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter")
-    data_path: str = field(default=r"C:\Users\Mr LEYE\Downloads\FounderAI\training_data\teranga_merged.jsonl")
-    output_path: str = field(default=r"C:\Users\Mr LEYE\Downloads\FounderAI\lora_adapter\evaluation_metrics.json")
+    base_model_path: str = field(default=os.getenv("FOUNDER_AI_BASE_MODEL_PATH", str(_repo_root() / "base_model_fp32")))
+    adapter_path: str = field(default=os.getenv("FOUNDER_AI_ADAPTER_PATH", str(_repo_root() / "lora_adapter")))
+    data_path: str = field(default=os.getenv("FOUNDER_AI_DATA_PATH", str(_training_root() / "teranga_merged.jsonl")))
+    output_path: str = field(default=os.getenv("FOUNDER_AI_EVAL_OUTPUT_PATH", str(_repo_root() / "lora_adapter" / "evaluation_metrics.json")))
     max_seq_length: int = field(default=768)
 
 

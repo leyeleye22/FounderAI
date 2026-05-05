@@ -2,11 +2,13 @@
 import torch
 import json
 import os
+from pathlib import Path
 from safetensors.torch import load_file, save_file
 import shutil
 
-MODEL_DIR = "C:/Users/Mr LEYE/Downloads/FounderAI"
-OUTPUT_DIR = "C:/Users/Mr LEYE/Downloads/FounderAI/base_model_fp32"
+REPO_ROOT = Path(__file__).resolve().parents[1]
+MODEL_DIR = os.getenv("FOUNDER_AI_FP8_MODEL_DIR", str(REPO_ROOT))
+OUTPUT_DIR = os.getenv("FOUNDER_AI_FP32_OUTPUT_DIR", str(REPO_ROOT / "base_model_fp32"))
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
