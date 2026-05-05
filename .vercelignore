@@ -3,6 +3,9 @@
 .venv/
 .pytest_cache/
 .rag/
+.env
+.env.*
+!.env.example
 __pycache__/
 tests/
 scripts/
