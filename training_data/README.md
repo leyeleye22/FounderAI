@@ -150,6 +150,64 @@ Current repairs cover:
 - top-down market sizing
 - feature-first GTM prompts
 
+### 3e. Google Colab Free V1
+
+If your local PC does not have enough GPU or RAM, use the Colab notebook:
+
+- `training_data/founderai_colab_free_v1.ipynb`
+
+What this setup changes compared with the local script:
+
+- uses a Hugging Face model id instead of a local Windows path
+- uses 4-bit QLoRA by default
+- uses a shorter sequence length (`512`) to fit smaller Colab GPUs
+- writes checkpoints and metrics to Google Drive
+- resumes automatically from the latest checkpoint if the session was interrupted
+
+Recommended first pass on Colab free:
+
+- runtime: `T4 GPU` if available
+- `FOUNDER_AI_COLAB_USE_4BIT=true`
+- `FOUNDER_AI_COLAB_EPOCHS=1`
+- `FOUNDER_AI_COLAB_MAX_SEQ_LENGTH=512`
+- `FOUNDER_AI_COLAB_GRAD_ACCUM=8`
+
+If you only want a very fast smoke test before a fuller run:
+
+- set `FOUNDER_AI_COLAB_SAMPLE_LIMIT=120`
+
+If the session survives and memory is stable:
+
+- set `FOUNDER_AI_COLAB_SAMPLE_LIMIT=0` to use the full train split
+- optionally raise `FOUNDER_AI_COLAB_MAX_SEQ_LENGTH` to `768`
+
+Entry point used by the notebook:
+
+```bash
+python training_data/train_qwen3_lora_colab.py
+```
+
+Main environment variables for the Colab script:
+
+- `FOUNDER_AI_COLAB_BASE_MODEL`
+- `FOUNDER_AI_COLAB_DATA_PATH`
+- `FOUNDER_AI_COLAB_OUTPUT_DIR`
+- `FOUNDER_AI_COLAB_METRICS_PATH`
+- `FOUNDER_AI_COLAB_SAMPLE_LIMIT`
+- `FOUNDER_AI_COLAB_USE_4BIT`
+- `FOUNDER_AI_COLAB_EPOCHS`
+- `FOUNDER_AI_COLAB_MAX_SEQ_LENGTH`
+- `FOUNDER_AI_COLAB_GRAD_ACCUM`
+- `FOUNDER_AI_COLAB_SAVE_STEPS`
+- `FOUNDER_AI_COLAB_EVAL_STEPS`
+
+Notes for Colab free:
+
+- runtime availability is dynamic
+- GPU access is not guaranteed
+- sessions can terminate early
+- that is why Drive-based checkpoints matter for this workflow
+
 ### 4. Merge Adapter (Optional)
 
 ```bash
