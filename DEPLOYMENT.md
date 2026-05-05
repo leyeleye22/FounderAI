@@ -72,8 +72,12 @@ Use at least:
 - `FOUNDERPATH_API_BASE_URL`
 - `FOUNDERPATH_API_TOKEN`
 - `FOUNDER_AI_USE_LOCAL_HEURISTICS`
+- `LLM_PROVIDER`
 - `LLM_API_BASE_URL`
 - `LLM_MODEL_NAME`
+- `HF_INFERENCE_MODEL`
+- `HF_INFERENCE_PROVIDER`
+- `HF_TOKEN`
 - `USE_FINETUNED_MODEL`
 - `FINETUNED_MODEL_PATH`
 - `LORA_ADAPTER_PATH`
@@ -212,6 +216,67 @@ Important for Vercel:
 - `requirements.txt` is intentionally lightweight for the serverless runtime
 - retrieval extras live in `requirements.retrieval.txt`
 - local model serving should wait for your future Hostinger VPS target
+
+## Hugging Face V1
+
+If you want a very fast V1 before serving your own fine-tuned model, FounderAI can use Hugging Face hosted inference directly.
+
+Use these `.env` values:
+
+```env
+LLM_PROVIDER=huggingface
+HF_INFERENCE_MODEL=Qwen/Qwen3-8B
+HF_INFERENCE_PROVIDER=auto
+HF_TOKEN=
+USE_FINETUNED_MODEL=false
+```
+
+What this gives you:
+
+- FounderAI keeps its own business logic and response shaping
+- only the text generation layer is delegated to Hugging Face
+- your frontend contract stays unchanged
+
+What this does not give you:
+
+- it does not automatically serve your Colab LoRA adapter
+- it is best for a fast remote baseline while your fine-tuned flow matures
+
+## Colab Adapter -> Hugging Face Hub
+
+When a Colab run finishes and gives you a zip like `founderai_lora_adapter.zip`, publish it to a Hugging Face model repo:
+
+```powershell
+cd "C:\Users\Mr LEYE\Downloads\FounderAI"
+$env:HF_TOKEN="hf_xxx"
+python scripts/publish_lora_adapter_to_hub.py `
+  "C:\Users\Mr LEYE\Downloads\founderai_lora_adapter.zip" `
+  --repo-id "leyeleye22/founderai-qwen3-lora-v1"
+```
+
+This script:
+
+- accepts either a local adapter folder or the Colab zip directly
+- validates required adapter files
+- creates the Hub model repo if needed
+- uploads the adapter and a basic model card
+
+## GitHub Actions for Hugging Face publishing
+
+A manual workflow is included:
+
+- `.github/workflows/huggingface-model-publish.yml`
+
+Use it when the adapter folder or zip is already available in the checked-out workspace on GitHub Actions.
+
+Required secret:
+
+- `HF_TOKEN`
+
+Useful note:
+
+- because Colab artifacts are usually downloaded to your laptop first, the local script is the main path after training
+- the GitHub Actions workflow is most useful when you intentionally place the adapter in the repo or in a pre-staged workspace
 
 ## Local LoRA Smoke Test
 

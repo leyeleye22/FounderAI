@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     force_in_memory_retrieval: bool = Field(default=False, alias="FOUNDER_AI_FORCE_IN_MEMORY_RETRIEVAL")
 
     # LLM settings
+    llm_provider: str = Field(default="local-api", alias="LLM_PROVIDER")
     llm_api_base_url: str | None = Field(default=None, alias="LLM_API_BASE_URL")
     llm_model_name: str = Field(default="qwen3-4b-fp8", alias="LLM_MODEL_NAME")
     llm_request_timeout: float = Field(default=60.0, alias="LLM_REQUEST_TIMEOUT")
@@ -35,6 +36,9 @@ class Settings(BaseSettings):
     llm_reasoning_temperature: float = Field(default=0.6, alias="LLM_REASONING_TEMPERATURE")
     llm_reasoning_top_p: float = Field(default=0.95, alias="LLM_REASONING_TOP_P")
     llm_reasoning_max_tokens: int = Field(default=1400, alias="LLM_REASONING_MAX_TOKENS")
+    hf_token: str | None = Field(default=None, alias="HF_TOKEN")
+    hf_inference_model: str | None = Field(default=None, alias="HF_INFERENCE_MODEL")
+    hf_inference_provider: str = Field(default="auto", alias="HF_INFERENCE_PROVIDER")
 
     # Fine-tuned model settings
     finetuned_model_path: str | None = Field(default=None, alias="FINETUNED_MODEL_PATH")

@@ -30,8 +30,12 @@ def create_llm_service() -> BaseLLMService:
         if service.is_available():
             return service
 
+    if settings.llm_provider == "huggingface" or settings.hf_inference_model:
+        from app.services.llm.huggingface_inference import HuggingFaceInferenceService
+
+        return HuggingFaceInferenceService()
+
     # Fall back to API-based Qwen
     from app.services.llm.local_qwen import LocalQwenService
 
     return LocalQwenService()
-

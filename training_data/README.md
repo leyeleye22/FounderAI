@@ -210,6 +210,24 @@ Notes for Colab free:
 - sessions can terminate early
 - the notebook is optimized for a quick first run without extra setup
 
+### 3f. Publish a Colab adapter to Hugging Face Hub
+
+Once Colab generates a zip like `founderai_lora_adapter.zip`, you can publish it to a Hugging Face model repo:
+
+```powershell
+cd "C:\Users\Mr LEYE\Downloads\FounderAI"
+$env:HF_TOKEN="hf_xxx"
+python scripts/publish_lora_adapter_to_hub.py `
+  "C:\Users\Mr LEYE\Downloads\founderai_lora_adapter.zip" `
+  --repo-id "leyeleye22/founderai-qwen3-lora-v1"
+```
+
+This is useful when:
+
+- you train only from time to time on Colab
+- you want a clean registry of adapters
+- you want GitHub / deployment infrastructure to reference a stable Hub repo instead of random local zip files
+
 ### 4. Merge Adapter (Optional)
 
 ```bash

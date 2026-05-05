@@ -1,0 +1,62 @@
+name: founderai-huggingface-model-publish
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_path:
+        description: "Adapter folder or zip path present in the checked-out workspace"
+        required: true
+        default: "models/founderai/current/lora_adapter"
+        type: string
+      repo_id:
+        description: "Target Hugging Face model repo, for example leyeleye22/founderai-qwen3-lora-v1"
+        required: true
+        type: string
+      base_model:
+        description: "Base model id used by the adapter"
+        required: false
+        default: "Qwen/Qwen3-4B"
+        type: string
+      private_repo:
+        description: "Create the model repo as private"
+        required: false
+        default: false
+        type: boolean
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Hub tooling
+        run: |
+          python -m pip install --upgrade pip
+          pip install "huggingface_hub>=0.34.0"
+
+      - name: Publish adapter to Hugging Face Hub
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "HF_TOKEN secret is required."
+            exit 1
+          fi
+
+          PRIVATE_FLAG=""
+          if [ "${{ inputs.private_repo }}" = "true" ]; then
+            PRIVATE_FLAG="--private"
+          fi
+
+          python scripts/publish_lora_adapter_to_hub.py \
+            "${{ inputs.source_path }}" \
+            --repo-id "${{ inputs.repo_id }}" \
+            --base-model "${{ inputs.base_model }}" \
+            $PRIVATE_FLAG
