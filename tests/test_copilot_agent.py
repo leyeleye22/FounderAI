@@ -88,6 +88,17 @@ class TestProblemStatement:
         assert len(apply_actions) > 0
         assert len(apply_actions[0].field_proposals) > 0
 
+    def test_complete_problem_should_not_repeat_same_rewrite(self, agent):
+        """A strong statement should not be echoed back as a fake rewrite."""
+        req = make_request(
+            "problem-statement",
+            "Les commercants de March Sandaga a Dakar perdent 3 heures par jour a cause de la gestion manuelle de leurs stocks sur papier"
+        )
+        resp = agent.run(req)
+
+        assert "version proposee" not in resp.reply.lower()
+        assert "ta phrase est deja concrete" in resp.reply.lower()
+
     def test_problem_extraction_identifies_who(self, agent):
         """Problem with clear target - should extract who field"""
         req = make_request(

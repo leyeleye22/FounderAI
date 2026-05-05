@@ -197,6 +197,10 @@ class ConversationalAgent(BaseAgent):
         intent = self._detect_problem_intent(text, fr=fr)
         missing_items = self._build_missing_items(analysis=analysis, fr=fr) if analysis else []
         improved_statement = analysis.get("improved_statement", "") if analysis else ""
+        improved_is_same = (
+            bool(candidate_problem and improved_statement)
+            and self._normalized_problem_text(candidate_problem) == self._normalized_problem_text(improved_statement)
+        )
 
         if is_reformulate and candidate_problem:
             return self._handle_reformulate(
@@ -254,16 +258,26 @@ class ConversationalAgent(BaseAgent):
                     reply_parts.append("Pour la rendre concrete, precise : QUI exactement, QUAND ca arrive, et COMBIEN ca coute." if fr else "To make it concrete, specify: WHO exactly, WHEN it happens, and HOW MUCH it costs.")
                     if is_sensitive_health:
                         reply_parts.append("Comme on parle d'un sujet sante sensible, evite les formulations trop generales ou quasi-diagnostiques. Decris plutot des signes observables, un contexte precis, et l'impact sur la vie quotidienne." if fr else "Because this is a sensitive health topic, avoid vague or quasi-diagnostic phrasing. Describe observable signs, a precise context, and the impact on daily life instead.")
+                elif improved_is_same:
+                    strengths = self._build_problem_strengths(analysis=analysis, fr=fr)
+                    if strengths:
+                        reply_parts.append(
+                            ("Ta phrase est deja concrete sur " if fr else "Your sentence is already concrete on ")
+                            + ", ".join(strengths[:2])
+                            + "."
+                        )
+                    else:
+                        reply_parts.append("Ta phrase est deja assez concrete. Le vrai sujet maintenant, c est de la renforcer sans la repeter." if fr else "Your sentence is already fairly concrete. The real next step is to strengthen it without repeating it.")
                 else:
                     reply_parts.append("Je vois le point de depart. Voici comment le rendre plus clair." if fr else "I see the starting point. Here's how to make it clearer.")
 
-                if improved_statement:
+                if improved_statement and not improved_is_same:
                     reply_parts.append("")
                     reply_parts.append(f"Version proposee :\n\n{improved_statement}" if fr else f"Suggested version:\n\n{improved_statement}")
 
                 if missing_items:
                     reply_parts.append("")
-                    reply_parts.append("Pour la renforcer encore, precise aussi :" if fr else "To strengthen it further, also clarify:")
+                    reply_parts.append("Le vrai manque maintenant, c est plutot :" if fr else "What is still really missing now is:")
                     reply_parts.extend(f"- {item}" for item in missing_items[:3])
             else:
                 reply_parts = ["Envoie-moi ton probleme en une phrase simple, et je te dirai ce qui bloque puis je te proposerai une meilleure version." if fr else "Send me your problem in one simple sentence, and I'll tell you what's blocking it and propose a better version."]
@@ -1210,6 +1224,27 @@ class ConversationalAgent(BaseAgent):
         if analysis["missing_cost"]:
             items.append("quel impact reel cela cree" if fr else "what real impact this creates")
         return items
+
+    def _build_problem_strengths(self, *, analysis: dict | None, fr: bool) -> list[str]:
+        if not analysis:
+            return []
+
+        strengths: list[str] = []
+        if not analysis["missing_who"]:
+            strengths.append("la cible")
+        if not analysis["missing_when"]:
+            strengths.append("le contexte")
+        if not analysis["missing_how_often"]:
+            strengths.append("la frequence")
+        if not analysis["missing_cost"]:
+            strengths.append("l impact")
+        return strengths
+
+    def _normalized_problem_text(self, text: str) -> str:
+        lowered = text.lower().strip()
+        lowered = re.sub(r"[^\w\s]", "", lowered)
+        lowered = re.sub(r"\s{2,}", " ", lowered)
+        return lowered
 
     def _analyze_problem(self, text: str, *, fr: bool) -> dict:
         lowered = text.lower()
