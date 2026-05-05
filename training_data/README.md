@@ -206,6 +206,15 @@ The evaluation now includes:
 - automatic overfit risk analysis
 - a saved loss curve image
 
+Recommended full retrain rerun for the current merged dataset:
+
+- `FOUNDER_AI_COLAB_SAMPLE_LIMIT=0` to use the full train split
+- `FOUNDER_AI_COLAB_EPOCHS=2` for a stronger second pass
+- `FOUNDER_AI_COLAB_EVAL_STEPS=10`
+- `FOUNDER_AI_COLAB_SAVE_STEPS=10`
+
+This gives more intermediate evaluation points, which makes the overfit analysis more useful than the first smoke-test run.
+
 Main environment variables for the Colab script:
 
 - `FOUNDER_AI_COLAB_BASE_MODEL`
