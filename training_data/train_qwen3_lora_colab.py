@@ -56,6 +56,16 @@ def _env_float(name: str, default: float) -> float:
     return float(raw)
 
 
+def _preferred_cuda_dtype() -> torch.dtype:
+    if not torch.cuda.is_available():
+        return torch.float32
+
+    major, _minor = torch.cuda.get_device_capability(0)
+    if major >= 8:
+        return torch.bfloat16
+    return torch.float16
+
+
 @dataclass
 class ColabTrainingConfig:
     base_model_id: str = field(default_factory=lambda: os.getenv("FOUNDER_AI_COLAB_BASE_MODEL", "Qwen/Qwen3-4B"))
@@ -100,7 +110,7 @@ def create_lora_config(config: ColabTrainingConfig) -> LoraConfig:
 
 def create_quantization_config(config: ColabTrainingConfig) -> Optional[BitsAndBytesConfig]:
     if config.use_4bit:
-        compute_dtype = torch.bfloat16 if torch.cuda.is_available() and torch.cuda.is_bf16_supported() else torch.float16
+        compute_dtype = _preferred_cuda_dtype()
         return BitsAndBytesConfig(
             load_in_4bit=True,
             bnb_4bit_quant_type="nf4",
@@ -120,11 +130,12 @@ def load_model_and_tokenizer(config: ColabTrainingConfig):
 
     quant_config = create_quantization_config(config)
     use_cuda = torch.cuda.is_available()
-    default_dtype = torch.bfloat16 if use_cuda and torch.cuda.is_bf16_supported() else (torch.float16 if use_cuda else torch.float32)
+    default_dtype = _preferred_cuda_dtype()
 
     model_kwargs = {
         "trust_remote_code": True,
-        "torch_dtype": default_dtype,
+        "dtype": default_dtype,
+        "low_cpu_mem_usage": True,
     }
     if quant_config is not None and use_cuda:
         model_kwargs["quantization_config"] = quant_config
@@ -200,11 +211,14 @@ def gpu_summary() -> dict:
     if not torch.cuda.is_available():
         return {"cuda": False}
     props = torch.cuda.get_device_properties(0)
+    major, minor = torch.cuda.get_device_capability(0)
     return {
         "cuda": True,
         "name": props.name,
         "total_memory_gb": round(props.total_memory / (1024 ** 3), 2),
         "bf16_supported": bool(torch.cuda.is_bf16_supported()),
+        "compute_capability": f"{major}.{minor}",
+        "preferred_dtype": str(_preferred_cuda_dtype()).replace("torch.", ""),
     }
 
 
@@ -250,7 +264,7 @@ def main() -> None:
         logging_steps=config.logging_steps,
         save_total_limit=config.save_total_limit,
         fp16=bool(torch.cuda.is_available() and not torch.cuda.is_bf16_supported()),
-        bf16=bool(torch.cuda.is_available() and torch.cuda.is_bf16_supported()),
+        bf16=bool(torch.cuda.is_available() and _preferred_cuda_dtype() == torch.bfloat16),
         seed=config.seed,
         report_to="none",
         optim="paged_adamw_8bit" if (config.use_4bit or config.use_8bit) else "adamw_torch",
