@@ -212,3 +212,83 @@ Important for Vercel:
 - `requirements.txt` is intentionally lightweight for the serverless runtime
 - retrieval extras live in `requirements.retrieval.txt`
 - local model serving should wait for your future Hostinger VPS target
+
+## Local LoRA Smoke Test
+
+When you download a Colab adapter zip such as `founderai_lora_adapter.zip`, install it locally before testing FounderAI:
+
+```powershell
+cd "C:\Users\Mr LEYE\Downloads\FounderAI"
+python scripts/install_lora_adapter.py "C:\Users\Mr LEYE\Downloads\founderai_lora_adapter.zip" --force
+```
+
+This will extract the root adapter files into:
+
+- `models/founderai/current/lora_adapter`
+
+Then configure your local `.env` with:
+
+```env
+USE_FINETUNED_MODEL=true
+FINETUNED_MODEL_PATH=Qwen/Qwen3-4B
+LORA_ADAPTER_PATH=C:\Users\Mr LEYE\Downloads\FounderAI\models\founderai\current\lora_adapter
+HF_TOKEN=
+```
+
+Notes:
+
+- `FINETUNED_MODEL_PATH` can now be either a local model folder or a Hugging Face model id such as `Qwen/Qwen3-4B`
+- set `HF_TOKEN` if you hit anonymous rate limits on Hugging Face
+- keep `FOUNDER_AI_FORCE_IN_MEMORY_RETRIEVAL=true` for a lightweight local V1 if you do not want Chroma locally
+
+Launch the API locally:
+
+```powershell
+cd "C:\Users\Mr LEYE\Downloads\FounderAI"
+uvicorn app.main:app --host 0.0.0.0 --port 8010
+```
+
+Quick checks:
+
+```powershell
+Invoke-WebRequest http://127.0.0.1:8010/health
+```
+
+```powershell
+$body = @{
+  project = @{
+    workspace_id = "demo-workspace"
+    project_id = "demo-project"
+  }
+  module = @{
+    module_key = "problem_statement"
+    label = "Problem Statement"
+    filled_fields = @(
+      @{
+        field_name = "problemStatement"
+        label = "Problem Statement"
+        is_filled = $true
+        content = "Freelance founders lose time rewriting weak problem statements."
+      }
+    )
+    empty_fields = @("who", "when", "cost")
+    raw_content = "Freelance founders lose time rewriting weak problem statements."
+  }
+  message = "Help me improve this problem statement and suggest stronger field values."
+  locale = "fr"
+  conversation_history = @()
+} | ConvertTo-Json -Depth 10
+
+Invoke-RestMethod `
+  -Uri "http://127.0.0.1:8010/agents/chat" `
+  -Method Post `
+  -ContentType "application/json" `
+  -Body $body
+```
+
+Expected result:
+
+- a JSON response with `reply`
+- `actions`
+- `module_key`
+- optionally `field_proposals`
