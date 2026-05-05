@@ -19,7 +19,11 @@ def build_notebook() -> dict:
     dataset_b64 = base64.b64encode(gzip.compress(dataset_bytes, compresslevel=9)).decode("ascii")
     finetune_utils = FINETUNE_UTILS_PATH.read_text(encoding="utf-8")
     train_script = TRAIN_SCRIPT_PATH.read_text(encoding="utf-8")
-    requirements = TRAINING_REQUIREMENTS_PATH.read_text(encoding="utf-8").strip().splitlines()
+    requirements = [
+        line.strip()
+        for line in TRAINING_REQUIREMENTS_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.strip().startswith("#")
+    ]
     pip_line = "!pip install -q " + " ".join(requirements)
 
     cells = [
