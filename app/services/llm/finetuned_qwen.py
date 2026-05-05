@@ -40,11 +40,12 @@ class FinetunedQwenService(BaseLLMService):
     def _try_load_model(self) -> None:
         """Attempt to load the fine-tuned model."""
         try:
-            if not self._base_model_path or not os.path.exists(self._base_model_path):
-                self._load_error = "Base model path not found"
+            if not self._base_model_path:
+                self._load_error = "Base model path or model id not configured"
                 return
 
-            print(f"Loading base model from {self._base_model_path}...")
+            model_source = "local path" if os.path.exists(self._base_model_path) else "model id"
+            print(f"Loading base model from {model_source}: {self._base_model_path}...")
             self._tokenizer = AutoTokenizer.from_pretrained(
                 self._base_model_path,
                 trust_remote_code=True,
@@ -52,8 +53,13 @@ class FinetunedQwenService(BaseLLMService):
             self._tokenizer.pad_token = self._tokenizer.eos_token
 
             # Determine device
-            device = "cuda" if torch.cuda.is_available() else "cpu"
-            torch_dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+            torch_dtype = (
+                torch.bfloat16
+                if torch.cuda.is_available() and torch.cuda.is_bf16_supported()
+                else torch.float16
+                if torch.cuda.is_available()
+                else torch.float32
+            )
 
             self._model = AutoModelForCausalLM.from_pretrained(
                 self._base_model_path,
