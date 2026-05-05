@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "gtm-icp-primary",
+    "module": "gtm",
+    "field": "icp_selection",
+    "title": "Definition de l'ICP Primaire",
+    "content": "Une erreur frequente est de cibler des groupes trop larges (ex: 'les petites entreprises'). Une bonne strategie GTM exige de choisir un ICP Primaire extremement specifique.\n\nSegmentation par le 'Pain':\n- Regroupez les clients selon leurs priorites partagees et l'intensite de leur probleme, plutot que par de simples traits demographiques.\n- Exemple: Au lieu de 'commercants', utilisez 'commercants qui perdent plus de 100 000 FCFA/mois a cause des impayes'.\n\nSnapshot de Segmentation:\n- Utilisez un outil de notation pour comparer 2 a 4 segments potentiels sur des criteres:\n  1. Intensite du probleme (1-10): Quelle est la gravite du probleme pour ce segment?\n  2. Frequence (1-10): Le probleme survient-il quotidiennement, hebdomadairement, mensuellement?\n  3. Capacite a payer (1-10): Ce segment a-t-il les moyens de payer pour une solution?\n  4. Capacite a gagner (Ability-to-Win) (1-10): Avez-vous un avantage competitif pour ce segment (acces, expertise, reseaux)?\n- Calculez le score total pour chaque segment et choisissez le plus eleve.\n\nDeclaration d'ICP:\n- Formulez une seule phrase nommant le segment choisi et expliquez pourquoi il a obtenu le score le plus eleve.\n- Exemple: 'Notre ICP primaire est les salons de coiffure a Dakar avec 2-5 employes qui perdent 30% de leurs rendez-vous par manque de systeme de reservation, car ce segment combine une douleur intense (8/10), une frequence quotidienne (10/10), une capacite a payer moderee (6/10) et une capacite a gagner elevee (9/10) via notre reseau existant de 15 salons pilotes.'",
+    "tags": ["gtm", "icp-primary", "segmentation", "scoring", "ability-to-win"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "gtm-validation-action",
+    "module": "gtm",
+    "field": "validation",
+    "title": "Validation par l'Action - Lancement de l'Infrastructure",
+    "content": "Un GTM n'est pas seulement un plan, c'est une action lancee. Pour le programme, cela signifie:\n\nCRM de Decouverte:\n- Populer un CRM avec au moins 10 contacts potentiels correspondant a l'ICP choisi.\n- Le CRM peut etre simple: un Google Sheet avec Nom, Contact, Segment, Statut, Notes.\n- Chaque contact doit correspondre a votre declaration d'ICP.\n- Exemple de colonnes: Nom | Entreprise | Telephone | Email | Segment | Score Pain | Statut (contacte/renseigne/refuse) | Notes.\n\nScript d'Entretien:\n- Preparer un script d'entretien structure pour tester vos hypotheses de valeur.\n- Structure du script:\n  1. Introduction (2 min): Qui vous etes, pourquoi vous contactez, confidentialite\n  2. Contexte (5 min): Comment ils gerent le probleme actuellement\n  3. Douleur (5 min): Combien de temps/argent cela leur coute\n  4. Solutions actuelles (3 min): Qu'ont-ils deja essaye?\n  5. Disposition a payer (3 min): Combien paieraient-ils pour une solution?\n  6. Conclusion (2 min): Prochaines etapes, autorisation de les recontacter\n\nOutreach Immediat:\n- Initier les premiers contacts des que possible pour valider l'interet reel.\n- N'attendez pas d'avoir un produit parfait. Contactez des que vous avez un ICP et un script.\n- Objectif: 10 entretiens en 2 semaines.\n- Canal d'outreach: WhatsApp, LinkedIn, telephone, visite en personne (selon l'ICP).",
+    "tags": ["gtm", "validation", "crm", "interview-script", "outreach", "action"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "gtm-avoid-reverse",
+    "module": "gtm",
+    "field": "focus",
+    "title": "Eviter la Construction a l'envers",
+    "content": "Une strategie GTM echoue souvent parce que les fondateurs commencent par le 'Quoi' (le produit) au lieu du 'Qui' (le client).\n\nFocus sur l'Acquisition:\n- Le produit doit etre une 'reponse informee' a l'audience, pas l'inverse.\n- Convaincre un inconnu de payer est la partie la plus difficile.\n- Le GTM doit detailler comment atteindre, convaincre et faire payer cet utilisateur specifique.\n- Questions a se poser:\n  1. Ou trouve-t-on cet ICP en ligne/hors ligne?\n  2. Quel message le ferait cliquer/repondre?\n  3. Quelle preuve le convaincrait de payer?\n  4. Quel canal utiliser pour le paiement?\n\nPreuve de Valeur:\n- Identifiez les points de preuve necessaires pour declencher un achat:\n  - Pilote: Offrir un essai gratuit de 14 jours avec des resultats mesurables\n  - References: Temorignages de 2-3 clients pilotes\n  - Calcul de ROI: Montrer combien le client economise ou gagne\n  - Demo: Montrer le produit en action sur un cas reel\n- Exemple: Pour un outil de gestion de stocks, la preuve de valeur est 'reduction de 40% des erreurs de stock en 2 semaines'.\n\nErreur classique:\n- Construire le produit pendant 6 mois puis chercher des clients.\n- La bonne approche: Trouver 10 clients potentiels, valider le probleme, puis construire la solution minimale qui resout le probleme.",
+    "tags": ["gtm", "acquisition", "value-proof", "reverse-construction", "customer-first"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "gtm-operational-discipline",
+    "module": "gtm",
+    "field": "operations",
+    "title": "Discipline Operationnelle GTM",
+    "content": "DACI pour les Decisions:\n- Definissez clairement les roles pour chaque decision GTM:\n  - Driver (D): Celui qui fait avancer la decision, coordonne, pousse l'execution\n  - Approver (A): Le decideur final, celui qui dit 'oui' ou 'non'\n  - Contributors (C): Ceux qui fournissent des informations, des donnees, des expertises\n  - Informed (I): Ceux qui doivent etre informes de la decision apres qu'elle est prise\n- Exemple: Pour une decision de canal d'acquisition:\n  - D: Responsable marketing\n  - A: Fondateur/CEO\n  - C: Equipe produit, equipe ventes\n  - I: Investisseurs, equipe technique\n\nLog de Decisions:\n- Documentez chaque semaine quelle decision a ete prise, sur quelle preuve elle s'appuie et quelle est la prochaine hypothese a tester.\n- Format du log:\n  | Semaine | Decision | Preuve utilisee | Hypothese suivante | Statut |\n  |---------|----------|-----------------|-------------------|--------|\n  | S1 | Canal principal = WhatsApp | 8/10 ICP utilisent WhatsApp quotidiennement | Les ICP repondront aux messages sortants | Teste |\n  | S2 | Prix = 5 000 FCFA/mois | 6/10 ICP paient deja 3 000-7 000 pour des outils | 50% des essais convertiront en payants | En cours |\n\nPourquoi cette discipline:\n- Evite les decisions basees sur des intuitions non testees\n- Permet de tracer l'evolution de la strategie GTM\n- Rend les iterations mesurables et justifiables\n- Force l'equipe a baser les decisions sur des preuves, pas des opinions",
+    "tags": ["gtm", "dacI", "decision-log", "operational-discipline", "governance"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "document_id": "validation-core-pillars",
+    "module": "problem_validation",
+    "field": "validation",
+    "title": "Les trois piliers de la validation",
+    "content": "La validation consiste a transformer l'entrepreneur, détenteur d'une idée, en un collecteur de preuves. L'objectif est de generer des insights reels plutot que de chercher un simple biais de confirmation.\n\nTrois piliers principaux:\n1. L'agnosticisme de la solution: Valider le probleme signifie decouvrir si les gens sont interesses par ce que vous construisez sans jamais mentionner votre produit.\n2. L'etude des comportements passes: Les opinions sur le futur ne sont pas des preuves; seules les actions passees concretes comptent.\n3. La mesure de la severite: Il faut distinguer les problemes que les gens paieront pour resoudre de ceux qu'ils tolerent simplement.",
+    "tags": ["validation", "pillars", "mom-test", "proof"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "validation-discovery-prep",
+    "module": "problem_validation",
+    "field": "preparation",
+    "title": "Preparer l'entretien (Discovery Prep)",
+    "content": "1. Clarifiez l'hypothese a tester et definissez precisement le segment client cible.\n2. Preparez des questions ouvertes et identifiez les 'mauvaises questions' a eviter (celles qui menent a des reponses hypocrites ou flatteuses).\n\nMauvaises questions:\n- 'Est-ce que tu achèterais...?' (les gens disent oui pour etre polis)\n- 'Est-ce que ce probleme t'interesse?' (biais de confirmation)\n- 'Que penses-tu de mon idee?' (flatte, ne valide rien)\n\nBonnes questions:\n- 'Parle-moi de la derniere fois que tu as [action liee au probleme]'\n- 'Comment as-tu resolu ce probleme la derniere fois?'\n- 'Combien as-tu deja depense pour resoudre ce probleme?'",
+    "tags": ["validation", "interview", "preparation", "questions"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "validation-conduct-interview",
+    "module": "problem_validation",
+    "field": "interview",
+    "title": "Mener l'entretien - Focus sur la vie, pas l'idee",
+    "content": "Regles d'or du Mom Test (Samuel Darko):\n\n1. Parlez de leur vie, pas de votre idee: Si vous n'evoquez pas votre solution, vos questions deviennent automatiquement meilleures.\n2. Posez des questions sur des evenements passes specifiques: 'Detaillez comment vous avez resolu le probleme X la derniere fois.'\n3. Evitez le 'bavardage inutile': Ignorez les reponses contenant 'toujours', 'habituellement' ou 'je ferais'.\n4. Creusez les demandes de fonctionnalites: Si un client demande une fonction, demandez 'Pourquoi en avez-vous besoin?' et 'Comment faites-vous sans elle aujourd'hui?'\n\nCe qui compte:\n- Citer des exemples concrets de situations passees\n- Mentionner des depenses actuelles pour resoudre le probleme\n- Decrire des comportements reels, pas des intentions",
+    "tags": ["validation", "interview", "mom-test", "behavior"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "validation-measure-engagement",
+    "module": "problem_validation",
+    "field": "engagement",
+    "title": "Mesurer l'engagement et la douleur",
+    "content": "Un entretien reussi doit se terminer par un engagement concret:\n\n1. Engagement de temps: prochain rendez-vous fixe\n2. Engagement de reputation: introduction a un decideur\n3. Engagement financier: pre-commande ou paiement\n\nEvaluer le cout de l'inaction:\n- Demandez 'Quelles sont les consequences de cette situation?'\n- Identifiez si le probleme est assez couteux pour justifier un achat\n- Le probleme doit etre une DOULEUR, pas une gene\n\nDistinction cruciale:\n- Douleur = la personne cherche activement une solution\n- Gene = la personne tolerera encore longtemps",
+    "tags": ["validation", "engagement", "pain", "commitment"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "validation-synthesize-proof",
+    "module": "problem_validation",
+    "field": "synthesis",
+    "title": "Synthetiser les preuves",
+    "content": "1. Extrayez des citations textuelles (verbatim) plutot que vos interpretations. Les mots exacts du prospect valent plus que votre analyse.\n2. Classez vos hypotheses selon leur statut:\n   - Validee: preuve directe obtenue (comportement passe confirme)\n   - Partiellement soutenue: indices mais pas de preuve definitive\n   - Invalidee: aucune evidence ou evidence contraire\n\nUne preuve = un comportement passe concret, pas une opinion sur le futur.\n\nExemples de preuves valides:\n- 'J'ai depense 50000 FCFA le mois dernier pour...'\n- 'La derniere fois, j'ai passe 3 heures a...'\n- 'J'ai deja essaye X et Y mais aucun ne marche parce que...'\n\nExemples de NON-preuves:\n- 'Je pense que ce serait utile'\n- 'Oui, ca m'interesserait'\n- 'Peut-etre que j'achèterais'",
+    "tags": ["validation", "synthesis", "proof", "evidence"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

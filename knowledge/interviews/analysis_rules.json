@@ -1,0 +1,22 @@
+[
+  {
+    "document_id": "interview-rule-evidence",
+    "module": "interview",
+    "field": "analysis",
+    "title": "Chercher la preuve utile",
+    "content": "Une bonne analyse d'interview extrait des preuves concretes, des objections, des douleurs repetees, des signaux d'achat et des formulations exactes du client. Une citation ou un fait observable vaut plus qu'une interpretation floue.",
+    "tags": ["interview", "evidence", "insight"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "interview-rule-propagation",
+    "module": "interview",
+    "field": "analysis",
+    "title": "Reinjecter les apprentissages",
+    "content": "Les apprentissages d'interview doivent nourrir le probleme, le BMC, la concurrence, le ROI, le GTM et les sprints. Si un signal commercial apparait, il faut proposer une action concrete. Si une objection revient, il faut la faire remonter dans les autres modules.",
+    "tags": ["interview", "propagation", "actions"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

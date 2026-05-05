@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "icp-validation-core",
+    "module": "icp",
+    "field": "validation",
+    "title": "Validation de l'ICP - Preuve par l'entretien",
+    "content": "Pour qu'un ICP soit considere comme 'valide', il ne doit pas etre une simple description de poste, mais une figure humaine dont les caracteristiques et les besoins sont prouves par des entretiens de decouverte.\n\nPreuve par l'entretien: Chaque champ de votre definition d'ICP doit remonter a des preuves issues d'entretiens ou a des donnees de segmentation scorees. Si une affirmation ne peut etre soutenue par des preuves, elle doit etre signalee comme une 'hypothese a tester'.\n\nEchantillonnage: Il est recommande de mener entre 5 et 10 entretiens par segment de clientele. La validation est atteinte lorsque vous arrivez a une 'saturation de l'information', c'est-a-dire que des schemas similaires emergent systematiquement.\n\nSignaux de priorite: Un probleme valide pour un ICP se reconnait par des investissements concrets (temps/argent), l'existence de 'hacks' ou de solutions de contournement artisanales, et une recherche active de solutions par le client.",
+    "tags": ["icp", "validation", "interview", "proof", "saturation"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "icp-persona-narrative",
+    "module": "icp",
+    "field": "persona",
+    "title": "Humaniser la cible - Persona Narrative",
+    "content": "Ne vous contentez pas d'un titre de poste. Redigez un court paragraphe decrivant une personne specifiquement nommee (ex: 'Ama' ou 'Abena').\n\nDecrivez:\n- Son quotidien\n- Ses frustrations precises\n- Les consequences reelles de ses problemes\n\nExemple: 'Ama, 32 ans, directrice financiere d'une PME de 15 personnes a Abidjan, passe 3 a 4 heures chaque vendredi a reconcilier manuellement des rapports Excel avec ses relevés bancaires. Elle rate souvent des echeances de paiement parce qu'elle perd du temps dans des taches repetitives, ce qui genere du stress et nuit a sa credibilite aupres de sa direction.'\n\nUn bon ICP n'est pas un titre de poste, c'est une personne REELLE avec des problemes REELS.",
+    "tags": ["icp", "persona", "narrative", "humanize"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "icp-six-fields",
+    "module": "icp",
+    "field": "fields",
+    "title": "Les six champs fondamentaux de l'ICP",
+    "content": "1. CARACTERISTIQUES OBSERVABLES: Qui sont-ils en langage clair? (role, contexte geographique, taille de l'entreprise, situation actuelle)\n   - Pas de 'entrepreneurs en Afrique' (trop large)\n   - Oui a 'femmes entrepreneurs a Dakar, 28-35 ans, vendent en ligne, 2-5 employes'\n\n2. DOULEUR PRIMAIRE + JOB-TO-BE-DONE (JTBD): Utilisez une declaration specifiquement falsifiable.\n   - Evitez les generalites comme 'veut gagner du temps'\n   - Utilisez la formule: 'Quand [situation], je veux [motivation], pour que [resultat souhaite]'\n   - Exemple: 'Quand je prepare ma comptabilite mensuelle, je veux automatiser la reconciliation bancaire, pour que je puisse me concentrer sur la strategie au lieu de saisir des chiffres.'\n\n3. CONTEXTE D'ACHAT: Identifiez qui decide, quel evenement declenche l'achat (trigger), la source du budget et la duree du cycle de vente.\n   - Qui signe le cheque? (le decisionnaire)\n   - Qu'est-ce qui les pousse a chercher une solution MAINTENANT?\n   - Ou trouvent-ils le budget?\n   - Combien de temps prend la decision?\n\n4. ALTERNATIVES ACTUELLES: Documentez ce qu'ils font aujourd'hui au lieu d'utiliser votre solution.\n   - Le 'statu quo' = ne rien faire\n   - Les 'hacks' = solutions bricolees (Excel, WhatsApp, papier)\n   - Les concurrents directs = produits existants\n   - Chaque alternative revele la severite du probleme\n\n5. OU LES TROUVER: Identifiez les canaux precis.\n   - Communautes en ligne (groupes Facebook, LinkedIn, forums)\n   - Evenements de l'industrie (salons, conferences)\n   - Plateformes sociales (Twitter, Instagram, TikTok)\n   - Associations professionnelles\n\n6. VIABILITE STRATEGIQUE: Justifiez pourquoi ce segment est la bonne premiere cible.\n   - Accessibilite: Pouvez-vous les atteindre facilement?\n   - Rapidite d'adoption: Vont-ils adopter vite?\n   - Valeur de la preuve technique: Si ce segment valide, est-ce que d'autres suivront?",
+    "tags": ["icp", "fields", "jtbd", "buying-context", "alternatives", "channels"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "icp-defend-decision",
+    "module": "icp",
+    "field": "decision",
+    "title": "Defendre la decision ICP",
+    "content": "Le but d'un bon ICP est d'aboutir a une decision DEFENDABLE plutot qu'a une definition PARFAITE.\n\nRegles:\n1. Concentrez-vous sur UN SEUL ICP clair au debut. N'en ajoutez un deuxieme qu'apres avoir recu des signaux de validation forts pour le premier.\n2. Si vous ne pouvez pas expliquer POURQUOI cet ICP est le bon avec des preuves d'entretiens, votre ICP n'est pas valide.\n3. Un ICP sans preuves = une hypothese, pas une cible.\n4. Si 5-10 entretiens ne montrent pas de schemas repetes, votre ICP est probablement trop large ou mal defini.\n5. La saturation de l'information = quand vous entendez les memes frustrations, les memes mots, les memes comportements encore et encore.\n\nSignes d'un ICP non valide:\n- 'Tout le monde' ou 'presque tout le monde' est ma cible\n- Je n'ai parle a personne de ce segment\n- Je ne peux pas citer une phrase exacte d'un prospect\n- Mon ICP a plus de 35 ans d'ecart d'age\n- Je n'ai pas de preuves qu'ils paient deja pour resoudre le probleme",
+    "tags": ["icp", "decision", "focus", "validation-signals"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

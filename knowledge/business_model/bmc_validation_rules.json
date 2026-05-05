@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "bmc-fundamental-definition",
+    "module": "business_model",
+    "field": "definition",
+    "title": "Definition Fondamentale du BMC - Les 3 Piliers",
+    "content": "Un bon BMC doit clarifier trois piliers essentiels:\n\n1. CREATION DE VALEUR:\n- Ce que vous offrez au client.\n- Quelle solution apportez-vous a leurs problemes?\n- Comment votre produit/service transforme la vie du client?\n- Exemple: 'Nous offrons aux commercants un outil de suivi des ventes qui elimine les erreurs de calcul manuel.'\n\n2. CAPTURE DE VALEUR:\n- Comment vous genere des revenus.\n- Qui paie? Combien? Quand? Comment?\n- Modele de revenu: abonnement, transaction, freemium, licence, commission?\n- Exemple: 'Abonnement mensuel de 5 000 FCFA par commercant, facture le 1er du mois.'\n\n3. DISTRIBUTION DE VALEUR:\n- Comment vous atteignez vos clients.\n- Canaux de distribution: direct, partenaires, digital, physique?\n- Comment le client decouvre, achete et utilise votre solution?\n- Exemple: 'Acquisition via WhatsApp groups de commercants + ambassadeurs de quartier.'\n\nVerification: Si un de ces 3 piliers est manquant ou flou, le BMC est incomplet.",
+    "tags": ["bmc", "value-creation", "value-capture", "value-distribution", "pillars"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "bmc-nine-blocks",
+    "module": "business_model",
+    "field": "nine_blocks",
+    "title": "Les 9 Blocs de Construction du BMC",
+    "content": "Pour qu'un BMC soit considere comme 'complet' (version 2.0), les 9 blocs doivent etre entierement renseignes et interconnectes.\n\n1. Customer Segments: Qui sont vos clients cibles? (Doit correspondre a votre ICP defini)\n2. Value Propositions: Quelle solution apportez-vous a leurs problemes?\n3. Channels: Par quels moyens les atteignez-vous? (WhatsApp, site web, agents terrain, etc.)\n4. Customer Relationships: Quel type de relation entretenez-vous avec eux? (Self-service, dedie, communaute, automatisée)\n5. Revenue Streams: D'où vient l'argent? (Abonnement, vente, commission, freemium)\n6. Key Resources: De quoi avez-vous besoin pour fonctionner? (equipe technique, designer, serveurs, donnees)\n7. Key Activities: Quelles sont les actions cruciales a mener? (developpement, marketing, support, partenariats)\n8. Key Partners: Qui sont vos allies strategiques? (operateurs telecom, associations, fournisseurs)\n9. Cost Structure: Quelles sont vos depenses principales? (salaires, infrastructure, marketing, legal)\n\nInterconnexions a verifier:\n- Customer Segments -> Value Propositions: La proposition correspond-elle aux besoins du segment?\n- Value Propositions -> Channels: Les canaux permettent-ils de delivrer la proposition?\n- Channels -> Revenue Streams: Les canaux generent-ils du revenu?\n- Key Resources -> Key Activities: Les ressources permettent-elles les activites?\n- Key Activities -> Cost Structure: Les activites sont-elles refletees dans les couts?",
+    "tags": ["bmc", "nine-blocks", "canvas", "interconnections", "completion"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "bmc-idea-to-evidence",
+    "module": "business_model",
+    "field": "evidence",
+    "title": "Passer de l'Idee a la Preuve (Evidence-Based BMC)",
+    "content": "Un bon BMC doit evoluer d'un ensemble d'assumptions (hypotheses) vers un modele valide par des faits.\n\nCartographie des risques:\n- Identifiez et classez vos 10 hypotheses les plus risquees a travers le canevas.\n- Exemple: 'Hypothese risque #1: Les commercants paieront 5 000 FCFA/mois pour un outil de gestion.'\n- Exemple: 'Hypothese risque #2: Les commercants utiliseront l'outil quotidiennement.'\n- Classez-les par impact (haute/moyenne/basse) et par incertitude (validee/non testee/invalidee).\n\nValidation par l'etude de terrain:\n- Ne vous contentez pas de suppositions sur le comportement des clients.\n- Utilisez des donnees issues d'au moins 10 entretiens clients pour valider chaque bloc.\n- Exemple: '8/10 commercants interviewes ont declare perdre 2h/jour sur la gestion manuelle -> valide Value Proposition.'\n- Exemple: '3/10 commercants ont dit qu'ils paieraient 5 000 FCFA -> invalide Revenue Stream (trop optimiste).'\n\nAgnosticisme de la solution:\n- Le BMC doit se concentrer sur la resolution du probleme client avant de figer la solution technique.\n- Ne dites pas 'notre application mobile fera X'. Dites 'nous resoudrons le probleme Y par Z'.\n- La solution technique peut changer. Le probleme reste le meme.",
+    "tags": ["bmc", "evidence", "validation", "risk-mapping", "ground-research", "solution-agnostic"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "bmc-demo-friday-quality",
+    "module": "business_model",
+    "field": "quality_criteria",
+    "title": "Criteres de Qualite pour le Demo Friday",
+    "content": "Pour vos presentations, votre BMC doit demontrer:\n\nClarte et coherence:\n- On doit pouvoir lire une 'histoire' logique entre les blocs sans explication excessive.\n- Si quelqu'un doit vous demander 'mais comment ces deux blocs sont lies?', c'est un probleme.\n- Exemple de coherence: 'Nous ciblons les commercants (segment) qui perdent du temps sur la gestion (probleme) via un outil WhatsApp (canal) a 5 000 FCFA/mois (revenu).' \n\nAlignement:\n- Le segment client doit correspondre EXACTEMENT a la proposition de valeur et aux canaux choisis.\n- Si votre segment est 'les PME' mais votre proposition est 'outil pour commercants informels' = desalignement.\n- Si votre canal est 'Facebook Ads' mais votre ICP est 'commercants ruraux sans smartphone' = desalignement.\n\nConseil pratique:\n- Utilisez un format numerique (Excel, Canva, ou outil dedie) pour maintenir votre BMC a jour au fur et a mesure que vous recueillez des preuves sur le marche.\n- Un BMC n'est jamais 'fini'. Il evolue avec chaque entretien client et chaque donnee de terrain.\n- Versionnez votre BMC: v1 (hypotheses), v2 (apres 10 entretiens), v3 (apres pilote).\n\nChecklist Demo Friday:\n[ ] Les 9 blocs sont renseignes\n[ ] Les interconnexions sont logiques\n[ ] Les hypotheses risquees sont identifiees\n[ ] Les donnees de terrain sont citees pour valider les blocs cles\n[ ] L'histoire est comprehensible en 2 minutes sans explication",
+    "tags": ["bmc", "demo-friday", "quality", "alignment", "storytelling", "versioning"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

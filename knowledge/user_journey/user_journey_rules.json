@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "journey-user-reality-canvas",
+    "module": "user_journey",
+    "field": "reality_canvas",
+    "title": "User Reality Canvas - Fondations du parcours",
+    "content": "Avant de tracer le parcours, vous devez definir le contexte reel de l'utilisateur pour eviter les 'personas fictionnels'.\n\nContexte de l'appareil:\n- Precisez si l'utilisateur utilise un Android bas de gamme, un telephone a fonctions (feature phone) ou un appareil partage.\n- Exemple: 'Notre ICP utilise un Samsung A10 d'entree de gamme avec 2GB RAM et 16GB stockage.'\n- Exemple: 'L'utilisateur partage un telephone avec son conjoint et n'a pas de compte Google personnel.'\n\nRealite de la connectivite:\n- Le parcours doit fonctionner pour quelqu'un ayant des donnees instables, couteuses ou etant souvent hors ligne.\n- Exemple: 'Au Senegal rural, la connexion 3G est disponible 60% du temps. Le parcours doit fonctionner offline-first.'\n- Exemple: 'Le cout du MB de donnees represente 2% du revenu journalier de l'utilisateur. Chaque ko compte.'\n\nFacteurs de confiance:\n- Identifiez ce qui pourrait pousser l'utilisateur a abandonner definitivement le produit.\n- Exemples: perte d'argent, mauvaise comprehension des messages, peur de l'arnaque, experience precedente negative.\n- Chaque point de friction potentiel doit etre adresse dans le parcours.",
+    "tags": ["journey", "user-reality-canvas", "device", "connectivity", "trust"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "journey-low-fidelity-flows",
+    "module": "user_journey",
+    "field": "low_fidelity_flows",
+    "title": "Conception du flux - Low-Fidelity Flows",
+    "content": "Un bon User Flow doit etre concu sur papier ou tableau blanc avant de passer au numerique.\n\nComportement avant le visuel:\n- Concentrez-vous sur l'action de l'utilisateur plutot que sur l'apparence des boutons.\n- Exemple: 'L'utilisateur ouvre le bot WhatsApp -> Envoi une photo de sa transaction -> Recoit une confirmation -> Genere un rapport.'\n- Ne pensez pas aux couleurs ou polices. Pensez: 'Que fait l'utilisateur ici?'\n\nEtapes claires et explicites:\n- Chaque etape doit mener logiquement a la suivante.\n- Exemple Visbl: Ouverture du bot -> Envoi de transaction -> Confirmation -> Generation de rapport.\n- Si une etape ne mene pas clairement a la suivante, c'est un point de friction.\n\nPoints d'entree multiples:\n- Prevoyez differentes manieres d'interagir pour s'adapter aux preferences de l'utilisateur.\n- Exemple: par note vocale, texte ou image.\n- Exemple: Certains utilisateurs preferent envoyer une photo de leur recu, d'autres preferent taper le numero de transaction.\n- Un bon parcours offre au moins 2 voies d'entree pour les actions critiques.",
+    "tags": ["journey", "low-fidelity", "flows", "user-flow", "entry-points"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "journey-error-handling",
+    "module": "user_journey",
+    "field": "error_handling",
+    "title": "Gestion des erreurs et recuperation",
+    "content": "C'est la partie la plus souvent negligee mais essentielle pour instaurer la confiance.\n\nEtats d'erreur explicites:\n- Ne vous contentez pas d'un message d'erreur generique ('Erreur 404' ou 'Une erreur est survenue').\n- Expliquez le probleme en langage simple.\n- Mauvais: 'Transaction failed. Error code: TXN_ERR_001'\n- Bon: 'Votre paiement n'a pas pu etre traite car votre connexion internet a ete interrompue. Vos donnees ont ete sauvegardees.'\n\nChemins de recuperation:\n- Offrez TOUJOURS une solution a l'utilisateur pour continuer.\n- Exemples: bouton de reessai, support WhatsApp, appel a un agent, envoi par SMS.\n- Jamais de dead-end: l'utilisateur ne doit jamais etre bloque sans option.\n- Regle: Pour chaque point d'erreur possible, prevoir au moins 1 chemin de recuperation.\n\nErreurs courantes a eviter:\n- Message d'erreur technique que l'utilisateur ne comprend pas\n- Page blanche apres une erreur\n- Pas de bouton 'reessayer' ou 'contacter le support'\n- Perte des donnees saisies par l'utilisateur\n- Redirection vers une page d'accueil sans explication",
+    "tags": ["journey", "error-handling", "recovery", "trust", "dead-ends"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "journey-wcag-lite",
+    "module": "user_journey",
+    "field": "wcag_lite",
+    "title": "Principes WCAG-Lite pour parcours inclusif",
+    "content": "Le parcours doit etre inclusif 'par defaut' en repondant a ces questions lors de sa creation:\n\n1. Le flux fonctionne-t-il sur un ecran fissure ou sous un soleil eclatant?\n- Contraste suffisant entre texte et fond\n- Taille de police lisible sans zoom\n- Boutons assez grands pour etre cliques avec un doigt\n- Test: Regardez votre design en plein soleil sur un vieux telephone\n\n2. L'utilisateur sait-il quoi faire ensuite a chaque etape?\n- Chaque ecran doit avoir un call-to-action (CTA) clair\n- Pas d'ecran ou l'utilisateur se demande 'et maintenant?'\n- Utilisez des verbes d'action: 'Envoyer', 'Confirmer', 'Continuer'\n- Evitez les termes techniques: 'Soumettre la requete' -> 'Envoyer'\n\n3. La couleur est-elle le seul indicateur de succes ou d'echec?\n- Il faut TOUJOURS inclure du texte en plus de la couleur.\n- Mauvais: Un bouton vert pour succes, rouge pour erreur (inaccessible aux daltoniens)\n- Bon: Un bouton vert AVEC 'Succes' ecrit, un bouton rouge AVEC 'Erreur' ecrit\n- Utilisez des icones + texte + couleur pour chaque etat.\n\n4. Questions supplementaires:\n- Le parcours fonctionne-t-il pour quelqu'un qui ne lit pas couramment?\n- Les instructions sont-elles comprises par quelqu'un sans education technique?\n- Le parcours fonctionne-t-il dans la langue locale de l'utilisateur?",
+    "tags": ["journey", "wcag", "accessibility", "inclusive", "contrast"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

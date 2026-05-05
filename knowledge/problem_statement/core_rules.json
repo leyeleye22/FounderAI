@@ -1,0 +1,22 @@
+[
+  {
+    "document_id": "problem-rule-clarity",
+    "module": "problem_statement",
+    "field": "problemStatement",
+    "title": "Formuler un probleme clair",
+    "content": "Un bon probleme nomme une cible precise, une douleur concrete, un contexte observable et une consequence visible. Il ne commence pas par une solution. Il doit pouvoir etre relie a une preuve terrain issue d'une interview, d'une observation ou d'un comportement repete.",
+    "tags": ["clarity", "problem", "challenge"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "problem-rule-antipatterns",
+    "module": "problem_statement",
+    "field": "problemStatement",
+    "title": "Anti-patterns du probleme",
+    "content": "Un probleme est trop faible s'il est vague, s'il parle deja du produit, s'il ne dit pas qui souffre, ou s'il ne montre aucune frequence ni aucun cout. Les formulations du type 'je veux creer une app' ou 'les gens ont du mal' doivent etre challengees.",
+    "tags": ["anti-pattern", "problem", "rewrite"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

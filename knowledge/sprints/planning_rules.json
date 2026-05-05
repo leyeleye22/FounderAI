@@ -1,0 +1,22 @@
+[
+  {
+    "document_id": "sprint-rule-focus",
+    "module": "sprints",
+    "field": "planning",
+    "title": "Garder le sprint tres focalise",
+    "content": "Un bon sprint de fondateur reste court et concentre sur une avancee observable. Il vaut mieux quatre taches utiles qui ferment une boucle d'apprentissage qu'une longue liste d'execution dispersée.",
+    "tags": ["sprint", "focus", "planning"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "sprint-rule-feedback-loop",
+    "module": "sprints",
+    "field": "planning",
+    "title": "Partir du probleme et du terrain",
+    "content": "Le sprint doit partir du probleme actuel et des retours interviews. Les taches prioritaires sont celles qui clarifient le probleme, apportent une preuve terrain, reduisent une objection ou preparenat un test concret.",
+    "tags": ["sprint", "feedback", "interviews"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

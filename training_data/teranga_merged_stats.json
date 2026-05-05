@@ -1,0 +1,47 @@
+{
+  "total_records": 265,
+  "by_split": {
+    "test": 26,
+    "train": 211,
+    "validation": 28
+  },
+  "by_language": {
+    "en": 120,
+    "fr": 132,
+    "mixed": 13
+  },
+  "by_module": {
+    "business": 1,
+    "business-model-canvas": 40,
+    "competitive-landscape": 1,
+    "go-to-market": 2,
+    "icp": 41,
+    "market-sizing": 22,
+    "mixed": 13,
+    "problem-statement": 42,
+    "problem-validation": 22,
+    "research": 41,
+    "roi": 20,
+    "user-journey": 20
+  },
+  "by_source_dataset": {
+    "behavior_repair": 12,
+    "teranga_native": 13,
+    "venture_discovery": 240
+  },
+  "by_task_type": {
+    "assumption_mapping": 20,
+    "bmc_draft": 21,
+    "icp_creation": 20,
+    "icp_critique": 21,
+    "interview_debrief": 21,
+    "interview_script": 20,
+    "market_sizing": 21,
+    "problem_statement_generation": 21,
+    "problem_statement_rewrite": 21,
+    "problem_validation_plan": 22,
+    "roi_modeling": 20,
+    "teranga_native": 17,
+    "user_journey_map": 20
+  }
+}

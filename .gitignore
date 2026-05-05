@@ -1,0 +1,55 @@
+.git/
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+.env
+.env.*
+!.env.example
+
+# Runtime and local state
+.rag/
+logs/
+*.log
+*.pid
+*.seed
+*.out
+*.err
+
+# Build and packaging outputs
+build/
+dist/
+artifacts/
+*.tar
+*.tar.gz
+*.zip
+
+# Python cache / tooling
+*.pyc
+*.pyo
+*.pyd
+*.so
+.DS_Store
+
+# Heavy model artifacts and local fine-tuning outputs
+base_model_fp32/
+lora_adapter/
+lora_adapter_cpu_pilot_bench/
+lora_adapter_relay/
+lora_adapter_relay_backup_*/
+teranga-qwen3-merged/
+*.safetensors
+model.safetensors.index.json
+tokenizer.json
+tokenizer_config.json
+vocab.json
+merges.txt
+
+# Deployment-local storage
+data/
+models/

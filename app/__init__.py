@@ -1,0 +1,2 @@
+"""FounderAI application package."""
+

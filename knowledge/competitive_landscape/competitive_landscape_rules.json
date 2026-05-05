@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "competitive-types",
+    "module": "competitive_landscape",
+    "field": "types",
+    "title": "Les 4 types de concurrents",
+    "content": "Un bon paysage concurrentiel doit couvrir quatre categories distinctes pour refleter la realite du marche.\n\n1. STATUS QUO / DO NOTHING (Le plus fort concurrent):\n- Decrivez precisement ce que l'ICP fait aujourd'hui s'il choisit de ne pas agir.\n- Identifiez le cout de l'inaction en termes de temps, d'argent, de risque ou de reputation.\n- Exemple: 'Un commercant qui utilise encore un cahier papier pour gerer ses stocks perd 2h/jour et fait 15% d'erreurs.'\n- C'est le concurrent le plus dangereux car l'inertie est puissante.\n\n2. DIRECT COMPETITORS:\n- Produits ou services qui resolvent le MEME probleme pour le MEME client.\n- Exemple: Wowzi ou Diglancers pour TrustDm.\n- Listez 2-3 maximum avec leurs forces/faiblesses specifiques.\n- Ne listez pas tous les acteurs du marche, seulement ceux que votre ICP considere reellement.\n\n3. INDIRECT COMPETITORS:\n- Solutions qui resolvent un probleme different mais qui entrent en competition pour le MEME budget ou le MEME temps.\n- Exemple: YouTube ou les cours de soutien pour un outil educatif.\n- Exemple: Les groupes Facebook gratuits pour un outil de gestion de communaute payant.\n- Ces concurrents sont souvent oublies mais captent le budget disponible.\n\n4. SUBSTITUTES:\n- Elements qui eliminent ou reduisent entierement le besoin initial sans forcement resoudre le probleme directement.\n- Exemple: Si votre solution est 'livraison de repas sains', un substitut est 'cuisiner soi-meme le dimanche pour la semaine'.\n- Exemple: Si votre solution est un logiciel de comptabilite, un substitut est 'embaucher un comptable freelance'.",
+    "tags": ["competitive", "types", "status-quo", "direct", "indirect", "substitutes"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "competitive-switching-cost",
+    "module": "competitive_landscape",
+    "field": "switching_cost",
+    "title": "Evaluation du cout du changement (Switching Cost)",
+    "content": "Un bon Competitive Alternatives Map doit imperativement evaluer la friction.\n\nCe qui rend le passage a votre solution DIFFICILE:\n- Apprentissage d'une nouvelle interface (temps perdu au debut)\n- Migration de donnees depuis l'ancien outil\n- Changement d'habitudes et resistance culturelle\n- Risque percu: 'Et si le nouvel outil ne marche pas?'\n- Cout financier de la transition (abonnements annuels perdus, formation)\n\nCe qui rendrait ce changement VALABLE:\n- Gain de temps massif (ex: 3h/jour economisees)\n- Economies significatives (ex: 50% de reduction sur cout actuel)\n- Elimination d'une douleur specifique non resolue par les alternatives\n- Meilleur resultat business (ex: +30% de ventes)\n\nComment evaluer le switching cost avec votre ICP:\n- Demandez: 'Qu'est-ce qui vous empeche de changer aujourd'hui?'\n- Demandez: 'Combien de temps vous faudrait-il pour adopter un nouvel outil?'\n- Demandez: 'Quel est le risque percu du changement pour votre equipe?'\n- Comparez: Cout du changement vs Cout de rester dans la situation actuelle",
+    "tags": ["competitive", "switching-cost", "friction", "adoption", "change"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "competitive-positioning-statement",
+    "module": "competitive_landscape",
+    "field": "positioning",
+    "title": "Positionnement - Phrase structuree",
+    "content": "La conclusion de votre analyse concurrentielle doit pouvoir se resumer en une phrase de positionnement structuree.\n\nFormule:\n'Contrairement a [alternative], nous [differentiateur] pour que [ICP] puisse [resultat/impact].'\n\nExemples:\n- 'Contrairement aux cahiers papier, notre application automatise le suivi des stocks pour que les commercants puissent reduire les pertes de 40%.'\n- 'Contrairement aux logiciels de comptabilite complexes, nous offrons une interface en 3 clics pour que les petites PME puissent gerer leur finances sans comptable.'\n- 'Contrairement aux agences marketing couteuses, notre plateforme permet aux restaurants de gerer leurs reseaux sociaux en 15 min/jour.'\n\nRegles pour une bonne phrase de positionnement:\n- L'alternative doit etre SPECIFIQUE (pas 'les autres solutions')\n- Le differenciateur doit etre CONCRET (pas 'nous sommes meilleurs')\n- Le resultat doit etre MESURABLE (pas 'nous ameliorons')\n- L'ICP doit etre PRECIS (pas 'tout le monde')",
+    "tags": ["competitive", "positioning", "statement", "differentiation"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "competitive-ground-validation",
+    "module": "competitive_landscape",
+    "field": "validation",
+    "title": "Validation par les donnees de terrain",
+    "content": "Le paysage concurrentiel doit etre ancre dans des preuves issues de vos recherches de terrain.\n\nIl ne doit PAS reposer sur des suppositions:\n- Ne listez pas des concurrents parce que vous les avez vus sur Google.\n- Listez ceux que votre ICP utilise REELLEMENT aujourd'hui.\n- Utilisez vos donnees de decouverte client pour justifier pourquoi un segment prefere une alternative specifique plutot qu'une autre.\n\nQuestions de validation:\n- 'Qu'utilisez-vous actuellement pour resoudre ce probleme?'\n- 'Qu'avez-vous deja essaye? Pourquoi avez-vous abandonne?'\n- 'Qu'est-ce qui vous retient de changer?'\n- 'Combien payez-vous pour votre solution actuelle?'\n- 'Si cette solution disparaissait demain, que feriez-vous?'\n\nErreurs a eviter:\n- 'Nous n'avons pas de concurrents' = soit le marche n'existe pas, soit personne ne veut vraiment resoudre ce probleme.\n- Lister 10+ concurrents = vous ne savez pas qui sont vos vrais concurrents.\n- Ne pas mentionner le status quo = vous ignorez votre plus grand concurrent.\n- Se baser sur des rapports industriels = votre ICP n'est pas un rapport industriel.",
+    "tags": ["competitive", "validation", "ground-research", "customer-discovery"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

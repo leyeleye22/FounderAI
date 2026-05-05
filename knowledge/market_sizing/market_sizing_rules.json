@@ -1,0 +1,62 @@
+[
+  {
+    "document_id": "market-sizing-validation",
+    "module": "market_sizing",
+    "field": "validation",
+    "title": "Validation du Probleme avant le dimensionnement du marche",
+    "content": "Avant de calculer la taille du marche, vous devez valider que le probleme est reel par la recherche de terrain.\n\nPreuve par l'action: Un probleme est valide si les clients potentiels investissent deja du temps ou de l'argent pour le resoudre, ou s'ils utilisent des 'hacks' (solutions de contournement).\n\nMesure de la gravite: Posez des questions sur les consequences de la situation actuelle. Cela permet de separer les problemes que les gens tolerent de ceux pour lesquels ils sont prets a payer.\n\nDonnees factuelles: Utilisez des unites specifiques et comptables issues de vos entretiens (ex: 'X commercants perdent Y GHS par mois') plutot que des suppositions.",
+    "tags": ["market-sizing", "validation", "proof", "action", "severity"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "market-sizing-bottom-up",
+    "module": "market_sizing",
+    "field": "methodology",
+    "title": "Methodologie Bottom-Up pour TAM, SAM, SOM",
+    "content": "Un bon dimensionnement repose sur une methodologie Bottom-Up (ascendante), qui construit le marche a partir d'unites concretes et verifiables, plutot que sur des chiffres industriels globaux (Top-Down).\n\nPourquoi Bottom-Up:\n- Les chiffres Top-Down ('le marche africain du digital vaut X milliards') sont vagues et non actionnables.\n- Bottom-Up part de votre ICP reel et construit vers le haut.\n- Exemple Bottom-Up: 'Il y a 50 000 salons de coiffure a Dakar. 20% ont un smartphone et 2-5 employes. Prix mensuel = 15 000 FCFA. TAM = 50 000 x 15 000 x 12 = 9 milliards FCFA/an.'",
+    "tags": ["market-sizing", "bottom-up", "methodology", "TAM"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "market-sizing-tam",
+    "module": "market_sizing",
+    "field": "tam",
+    "title": "TAM - Total Addressable Market",
+    "content": "TAM (Total Addressable Market): La demande globale de toute personne ou entite qui pourrait potentiellement utiliser votre solution.\n\nConseils:\n- Evitez l'erreur de pretendre que 'tout le monde' est un client.\n- Definissez-le par un besoin non satisfait (ex: 'tous les commercants informels sans assurance en Afrique de l'Ouest').\n- Le TAM doit etre base sur un probleme valide, pas sur une idee.\n\nCalcul: TAM = Nombre total de clients potentiels x Prix annuel par client\n\nExemple: 500 000 PME en Afrique de l'Ouest sans outil de comptabilite x 180 000 FCFA/an = 90 milliards FCFA/an",
+    "tags": ["market-sizing", "TAM", "addressable-market"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "market-sizing-sam",
+    "module": "market_sizing",
+    "field": "sam",
+    "title": "SAM - Serviceable Addressable Market",
+    "content": "SAM (Serviceable Addressable Market): La part du TAM que vous pouvez reellement atteindre avec votre modele d'entreprise actuel.\n\nCritères de filtrage: Appliquez des filtres stricts tels que la geographie, l'equipement technologique (ex: posseder un smartphone) ou la structure de l'entreprise.\n\nExigence: Vous devez avoir des criteres clairs pour definir qui vous pouvez atteindre; ne restez pas vague.\n\nFiltres courants:\n- Geographie: 'Uniquement au Senegal' (pas 'toute l'Afrique')\n- Technologie: 'Possede un smartphone' (exclut les autres)\n- Taille: '2-5 employes' (exclut les trop petits et trop grands)\n- Secteur: 'Commerces de detail' (exclut les autres secteurs)\n\nCalcul: SAM = TAM x % des filtres applicables\n\nExemple: TAM = 500 000 PME. Filtres: Senegal (10%), smartphone (60%), 2-5 employes (40%) = 500 000 x 0.10 x 0.60 x 0.40 = 12 000 clients. SAM = 12 000 x 180 000 FCFA = 2.16 milliards FCFA/an.",
+    "tags": ["market-sizing", "SAM", "filters", "geography"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "market-sizing-som",
+    "module": "market_sizing",
+    "field": "som",
+    "title": "SOM - Serviceable Obtainable Market",
+    "content": "SOM (Serviceable Obtainable Market): La fraction du SAM que vous pouvez realistement capturer d'ici 1 a 3 ans.\n\nRealisme: Ne soyez pas excessivement optimiste (ex: viser 10% de part de marche des la premiere annee sans justification).\n\nFacteurs de contrainte:\n- Taille de votre equipe\n- Capacite operationnelle\n- Partenariats de distribution initiaux\n- Budget marketing disponible\n- Temps de cycle de vente\n\nCalcul typique: SOM = SAM x 1-5% sur 3 ans (pour une startup)\n\nExemple: SAM = 12 000 clients. SOM annee 1 = 12 000 x 1% = 120 clients. SOM annee 3 = 12 000 x 5% = 600 clients.\n\nSOM annee 1 = 120 x 180 000 FCFA = 21.6 millions FCFA/an\nSOM annee 3 = 600 x 180 000 FCFA = 108 millions FCFA/an",
+    "tags": ["market-sizing", "SOM", "realistic", "constraints"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "market-sizing-errors",
+    "module": "market_sizing",
+    "field": "errors",
+    "title": "Erreurs critiques a eviter",
+    "content": "1. ABSENCE DE SOURCES CITEES: Ne dites jamais 'faites-moi confiance'. Citez toujours des rapports (ex: GSMA, Statista) ou vos propres recherches de terrain.\n\n2. SEGMENTATION FLOUE: Plus votre description client est specifique (ex: 'salons de coiffure a Accra avec 2-5 employes utilisant WhatsApp'), plus votre calcul sera precis.\n\n3. CHIFFRES TOP-DOWN: 'Le marche africain vaut X milliards' ne veut rien dire si vous ne pouvez pas expliquer comment vous en capturez une partie.\n\n4. SOM TROP OPTIMISTE: Viser 10% ou plus du SAM en annee 1 sans equipe, budget ou partenariats = non credible.\n\n5. PAS DE LIEN AVEC L'ICP: Si votre TAM/SAM/SOM ne correspond pas a votre ICP defini, votre calcul est invalide.\n\n6. PRIX NON JUSTIFIE: Si vous ne pouvez pas expliquer pourquoi le client paierait ce prix, votre calcul est faux.\n\n7. PAS DE FILTRES: Si votre SAM = TAM, vous n'avez pas applique de filtres. Votre SAM est faux.",
+    "tags": ["market-sizing", "errors", "mistakes", "sources"],
+    "language": "fr",
+    "source_type": "rule"
+  }
+]

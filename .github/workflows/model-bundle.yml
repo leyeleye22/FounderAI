@@ -1,0 +1,47 @@
+name: founderai-model-bundle
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "training_data/**"
+      - "lora_adapter/**"
+      - "lora_adapter_relay/**"
+      - "lora_adapter_cpu_pilot_bench/**"
+      - "scripts/build_model_bundle.py"
+  workflow_dispatch:
+    inputs:
+      bundle_version:
+        description: "Optional explicit version for the model bundle"
+        required: false
+        type: string
+
+jobs:
+  package-model:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build model bundle
+        shell: bash
+        run: |
+          if [ -n "${{ inputs.bundle_version }}" ]; then
+            python scripts/build_model_bundle.py --version "${{ inputs.bundle_version }}"
+          else
+            python scripts/build_model_bundle.py
+          fi
+
+      - name: Upload model bundle artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: founderai-model-bundle
+          path: dist/model-bundles/*
+          if-no-files-found: error

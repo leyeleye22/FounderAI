@@ -1,0 +1,79 @@
+{
+  "dataset": {
+    "total_records": 265,
+    "by_split": {
+      "test": 26,
+      "train": 211,
+      "validation": 28
+    },
+    "by_language": {
+      "en": 120,
+      "fr": 132,
+      "mixed": 13
+    },
+    "by_source_dataset": {
+      "behavior_repair": 12,
+      "teranga_native": 13,
+      "venture_discovery": 240
+    },
+    "estimated_token_summary": {
+      "min": 320,
+      "p50": 479,
+      "p75": 514,
+      "p90": 547,
+      "p95": 585,
+      "max": 668
+    }
+  },
+  "train_task_mix": {
+    "assumption_mapping": 16,
+    "bmc_draft": 16,
+    "icp_creation": 16,
+    "icp_critique": 17,
+    "interview_debrief": 17,
+    "interview_script": 16,
+    "market_sizing": 16,
+    "problem_statement_generation": 17,
+    "problem_statement_rewrite": 17,
+    "problem_validation_plan": 18,
+    "roi_modeling": 16,
+    "teranga_native": 13,
+    "user_journey_map": 16
+  },
+  "validation_task_mix": {
+    "assumption_mapping": 4,
+    "bmc_draft": 1,
+    "icp_critique": 4,
+    "interview_debrief": 4,
+    "problem_statement_generation": 4,
+    "problem_validation_plan": 4,
+    "roi_modeling": 4,
+    "teranga_native": 3
+  },
+  "test_task_mix": {
+    "bmc_draft": 4,
+    "icp_creation": 4,
+    "interview_script": 4,
+    "market_sizing": 5,
+    "problem_statement_rewrite": 4,
+    "teranga_native": 1,
+    "user_journey_map": 4
+  },
+  "train_stage_mix": {
+    "warmup": 24,
+    "build-up": 65,
+    "integration": 122
+  },
+  "recommendation": {
+    "why_relay": [
+      "CPU training is too slow for one full run on 202 train records.",
+      "Starting with shorter records reduces early-step cost and lets the adapter learn the house style first.",
+      "Manual stop/resume across many short sessions is more realistic on this machine than marathon training."
+    ],
+    "expected_usage": [
+      "Run one relay session when the machine is free.",
+      "Let the trainer save LoRA weights and state after each shard.",
+      "Resume later without losing progress."
+    ]
+  }
+}

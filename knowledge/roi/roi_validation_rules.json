@@ -1,0 +1,42 @@
+[
+  {
+    "document_id": "roi-validation-phase",
+    "module": "roi",
+    "field": "validation",
+    "title": "Phase de Validation du Probleme - Input pour le ROI",
+    "content": "Pour que votre calcul de ROI soit accepte par un client, vous devez d'abord valider l'ampleur du probleme via des donnees de terrain.\n\nMettre un chiffre sur la douleur:\n- Identifiez combien de temps votre segment cible (ICP) perd chaque semaine\n- Identifiez le cout financier direct des erreurs manuelles\n- Exemple: 'Chaque coiffeur perd 3h/semaine sur la gestion des rendez-vous'\n- Exemple: 'Les erreurs manuelles coutent 25 000 FCFA/mois en retours produits'\n\nFrequence:\n- Determinez si le probleme est quotidien ou hebdomadaire\n- Donnez une echelle significative au calcul (par mois ou par an)\n- Probleme quotidien = impact plus fort que probleme mensuel\n- Exemple: 'Le probleme survient 5 fois par semaine = 260 fois par an'\n\nCout de l'inaction:\n- Listez les composants du cout actuel:\n  1. Pertes directes (argent perdu, produits defectueux)\n  2. Frais d'investigation (temps passe a chercher/resoudre)\n  3. Inefficacites operationnelles (heures perdues, retards)\n- Montrez ce que cela coute au client de ne 'rien faire'\n- Exemple: 'Ne rien faire coute 120 000 FCFA/mois = 1 440 000 FCFA/an'",
+    "tags": ["roi", "validation", "pain-quantification", "cost-of-inaction"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "roi-mini-calc-structure",
+    "module": "roi",
+    "field": "calculation",
+    "title": "Structure d'un ROI Mini-Calc efficace",
+    "content": "Un bon ROI ne doit pas etre une simple promesse, mais un 'cas economique defendable' structure en trois etapes.\n\nETAPE A: Cout Actuel vs Cout avec Solution\n- Calculez le cout actuel du probleme (ce que le client paie aujourd'hui en temps/argent)\n- Calculez le nouveau cout (avec votre outil inclus)\n- Soustrayez le nouveau cout du cout original = Cout Economise\n- Soyez conservateur sur l'impact reel de votre solution\n- Ne pretendez pas eliminer 100% du probleme sans preuve\n- Exemple: Cout actuel = 120 000 FCFA/mois. Avec solution = 25 000 FCFA/mois. Economie = 95 000 FCFA/mois.\n\nETAPE B: Valeur Nette et Pourcentage\n- Valeur Nette = Valeur delivree - Cout du changement (switching cost)\n- Le switching cost inclut: temps d'apprentissage, migration des donnees, formation\n- ROI % = (Valeur Nette / Cout de la solution) x 100\n- Exprimez le gain en pourcentage pour frapper les esprits\n- Exemple: MotorIQ affiche un ROI de 970% des la premiere annee\n\nETAPE C: Periode de Recuperation (Payback Period)\n- Calculez le nombre de mois necessaires pour que l'economie realisee couvre le cout de votre solution\n- Formule: Payback Period = Cout initial / Economie mensuelle\n- Un bon ROI montre generalement un remboursement en moins de 12 mois\n- Exemple: Solution a 50 000 FCFA. Economie mensuelle = 45 000 FCFA. Payback = 1.1 mois.",
+    "tags": ["roi", "calculation", "mini-calc", "payback-period", "net-value"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "roi-riskiest-assumptions",
+    "module": "roi",
+    "field": "assumptions",
+    "title": "Gestion des Assomptions les plus risquees",
+    "content": "Un bon ROI admet ses faiblesses pour gagner en credibilite.\n\nIdentifier les hypothese les plus faibles:\n- Identifiez clairement vos hypotheses les plus fragiles\n- Exemple: 'Nous supposons que le taux de fraude est de 25%'\n- Exemple: 'Nous supposons que chaque utilisateur economise 2h/semaine'\n- Exemple: 'Nous supposons un taux d'adoption de 60% dans les 3 mois'\n\nPreuve de validation:\n- Precisez quelle preuve validerait ou invaliderait ces chiffres lors d'un futur test\n- Exemple: 'Pour valider le taux de fraude de 25%, nous analyserons 500 transactions sur 2 semaines'\n- Exemple: 'Pour valider les 2h economisees, nous observerons 10 utilisateurs pendant 1 semaine'\n\nPourquoi admettre les faiblesses:\n- Montre que vous etes honnete et rigoureux\n- Le client fait plus confiance a un ROI qui admet ses limites\n- Permet d'iterer et d'ajuster les chiffres avec des donnees reelles\n- Transforme un ROI 'marketing' en 'cas economique defendable'",
+    "tags": ["roi", "assumptions", "risk", "validation", "credibility"],
+    "language": "fr",
+    "source_type": "rule"
+  },
+  {
+    "document_id": "roi-motoriq-example",
+    "module": "roi",
+    "field": "example",
+    "title": "Exemple concret de structure ROI - Modele MotorIQ",
+    "content": "Modele MotorIQ - Exemple concret de ROI structure:\n\n1. Total des pertes annuelles (Inaction): ~48.5M USD\n   - Fraud losses: 35M USD\n   - Investigation costs: 8.5M USD\n   - Operational inefficiencies: 5M USD\n\n2. Benefice net avec solution: 1.93M USD economises par an pour l'assureur\n   - Reduction fraude: 60% sur le segment cible\n   - Cout de la solution: 200 000 USD/an\n   - Valeur nette: 2.13M - 0.2M = 1.93M USD\n\n3. ROI: 970% avec un Payback Period de 1.1 mois\n   - ROI = (1.93M / 0.2M) x 100 = 965% (arrondi a 970%)\n   - Payback = 200 000 / (1.93M / 12) = 1.24 mois (arrondi a 1.1)\n\n4. Assomptions les plus risquees:\n   - Taux de fraude actuel estime a 25% (a valider par audit)\n   - Adoption de 60% des agents en 3 mois (a valider par pilote)\n   - Reduction fraude de 60% (a valider par comparaison avant/apres)",
+    "tags": ["roi", "example", "motoriq", "case-study"],
+    "language": "fr",
+    "source_type": "example"
+  }
+]
