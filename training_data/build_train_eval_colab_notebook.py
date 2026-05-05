@@ -105,6 +105,7 @@ def build_notebook() -> dict:
                 "os.environ['FOUNDER_AI_COLAB_PLOT_PATH'] = str(OUTPUT_DIR / 'loss_curve.png')\n",
                 "os.environ['FOUNDER_AI_COLAB_EVAL_SUMMARY_JSON'] = str(OUTPUT_DIR / 'behavioral_eval_summary.json')\n",
                 "os.environ['FOUNDER_AI_COLAB_EVAL_SUMMARY_MD'] = str(OUTPUT_DIR / 'behavioral_eval_summary.md')\n",
+                "os.environ['FOUNDER_AI_COLAB_RESET_OUTPUT'] = 'true'\n",
                 "os.environ['FOUNDER_AI_COLAB_USE_4BIT'] = 'true'\n",
                 "os.environ['FOUNDER_AI_COLAB_EPOCHS'] = '2'\n",
                 "os.environ['FOUNDER_AI_COLAB_MAX_SEQ_LENGTH'] = '512'\n",
@@ -112,7 +113,7 @@ def build_notebook() -> dict:
                 "os.environ['FOUNDER_AI_COLAB_SAVE_STEPS'] = '10'\n",
                 "os.environ['FOUNDER_AI_COLAB_EVAL_STEPS'] = '10'\n",
                 "os.environ['FOUNDER_AI_COLAB_SAMPLE_LIMIT'] = '0'\n",
-                "print('Training + eval config ready for the full train split.')\n",
+                "print('Training + eval config ready for a fresh full-train run.')\n",
             ],
         },
         {

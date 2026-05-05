@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import math
 import os
+import shutil
 from dataclasses import asdict, dataclass, field
 from pathlib import Path
 from typing import Optional
@@ -82,6 +83,7 @@ class ColabTrainingConfig:
     report_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_REPORT_PATH", Path("/content/founderai-colab-v1/lora_adapter/training_report.md")))
     plot_path: Path = field(default_factory=lambda: _env_path("FOUNDER_AI_COLAB_PLOT_PATH", Path("/content/founderai-colab-v1/lora_adapter/loss_curve.png")))
     sample_limit: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_SAMPLE_LIMIT", 0))
+    reset_output_dir: bool = field(default_factory=lambda: os.getenv("FOUNDER_AI_COLAB_RESET_OUTPUT", "false").lower() == "true")
 
     lora_r: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_LORA_R", 8))
     lora_alpha: int = field(default_factory=lambda: _env_int("FOUNDER_AI_COLAB_LORA_ALPHA", 16))
@@ -392,6 +394,8 @@ def gpu_summary() -> dict:
 
 def main() -> None:
     config = ColabTrainingConfig()
+    if config.reset_output_dir and config.output_dir.exists():
+        shutil.rmtree(config.output_dir)
     config.output_dir.mkdir(parents=True, exist_ok=True)
 
     if not torch.cuda.is_available():
@@ -470,7 +474,7 @@ def main() -> None:
         data_collator=default_data_collator,
     )
 
-    last_checkpoint = get_last_checkpoint(str(config.output_dir))
+    last_checkpoint = None if config.reset_output_dir else get_last_checkpoint(str(config.output_dir))
     train_output = trainer.train(resume_from_checkpoint=last_checkpoint) if last_checkpoint else trainer.train()
     trainer.save_model(str(config.output_dir))
     tokenizer.save_pretrained(str(config.output_dir))

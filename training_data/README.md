@@ -216,6 +216,7 @@ Recommended full retrain rerun for the current merged dataset:
 - `FOUNDER_AI_COLAB_EPOCHS=2` for a stronger second pass
 - `FOUNDER_AI_COLAB_EVAL_STEPS=10`
 - `FOUNDER_AI_COLAB_SAVE_STEPS=10`
+- `FOUNDER_AI_COLAB_RESET_OUTPUT=true` to clear old checkpoints before training
 
 This gives more intermediate evaluation points, which makes the overfit analysis more useful than the first smoke-test run.
 
