@@ -5,21 +5,32 @@ from app.schemas.common import SourceChunk
 from app.services.retrieval.base import BaseRetriever
 
 
-MODULE_KEY_MAP: dict[str, str] = {
-    "problem-statement": "problem_validation",
-    "problem-validation": "problem_validation",
-    "research": "problem_validation",
-    "icp": "icp",
-    "business": "business_model",
-    "competitive-landscape": "competitive_landscape",
-    "market-sizing": "market_sizing",
-    "product": "business_model",
-    "gtm": "gtm",
-    "journey": "user_journey",
-    "roi": "roi",
-    "workshop": "business_model",
-    "sprints": "business_model",
-    "gamma": "business_model",
+MODULE_SEARCH_GROUPS: dict[str, list[str]] = {
+    "problem-statement": ["problem_statement", "problem_validation"],
+    "problem_statement": ["problem_statement", "problem_validation"],
+    "problem-validation": ["problem_validation", "problem_statement"],
+    "problem_validation": ["problem_validation", "problem_statement"],
+    "research": ["problem_validation", "problem_statement"],
+    "icp": ["icp"],
+    "business": ["business_model"],
+    "business-model": ["business_model"],
+    "business_model": ["business_model"],
+    "competitive-landscape": ["competitive_landscape"],
+    "competitive_landscape": ["competitive_landscape"],
+    "market-sizing": ["market_sizing"],
+    "market_sizing": ["market_sizing"],
+    "product": ["business_model"],
+    "gtm": ["gtm"],
+    "journey": ["user_journey"],
+    "user-journey": ["user_journey"],
+    "user_journey": ["user_journey"],
+    "roi": ["roi"],
+    "workshop": ["business_model"],
+    "sprints": ["sprints"],
+    "sprint": ["sprints"],
+    "gamma": ["business_model"],
+    "interview": ["interviews"],
+    "interviews": ["interviews"],
 }
 
 
@@ -36,24 +47,16 @@ class InMemoryRetriever(BaseRetriever):
 
         loaded = False
         for json_file in knowledge_dir.rglob("*.json"):
-            module_key = self._json_to_module_key(json_file)
-            if module_key:
-                chunks = self._load_json_file(json_file)
-                if chunks:
-                    if module_key not in self._knowledge:
-                        self._knowledge[module_key] = []
-                    self._knowledge[module_key].extend(chunks)
-                    loaded = True
+            module_key = json_file.parent.name
+            chunks = self._load_json_file(json_file)
+            if chunks:
+                if module_key not in self._knowledge:
+                    self._knowledge[module_key] = []
+                self._knowledge[module_key].extend(chunks)
+                loaded = True
 
         if not loaded:
             self._load_fallback()
-
-    def _json_to_module_key(self, json_file: Path) -> str | None:
-        parent_dir = json_file.parent.name
-        for key, value in MODULE_KEY_MAP.items():
-            if value == parent_dir:
-                return key
-        return None
 
     def _load_json_file(self, json_file: Path) -> list[SourceChunk]:
         try:
@@ -75,7 +78,7 @@ class InMemoryRetriever(BaseRetriever):
 
     def _load_fallback(self) -> None:
         self._knowledge = {
-            "problem-statement": [
+            "problem_statement": [
                 SourceChunk(
                     title="Probleme clair",
                     excerpt="Un bon probleme nomme une cible precise, une douleur concrete et un contexte observable.",
@@ -95,14 +98,11 @@ class InMemoryRetriever(BaseRetriever):
         }
 
     def search(self, *, query: str, module: str, limit: int = 4) -> list[SourceChunk]:
-        chunks = self._knowledge.get(module, [])
-        if not chunks:
-            base_module = MODULE_KEY_MAP.get(module)
-            if base_module:
-                for key, value in MODULE_KEY_MAP.items():
-                    if value == base_module and key in self._knowledge:
-                        chunks = self._knowledge[key]
-                        break
+        chunks: list[SourceChunk] = []
+        for group_key in MODULE_SEARCH_GROUPS.get(module, [module]):
+            chunks.extend(self._knowledge.get(group_key, []))
+            if len(chunks) >= limit:
+                break
         return chunks[:limit]
 
     def count(self) -> int:

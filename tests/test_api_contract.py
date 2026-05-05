@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
+from app.services.retrieval.in_memory import InMemoryRetriever
 
 
 client = TestClient(app)
@@ -56,3 +57,11 @@ def test_chat_endpoint_contract() -> None:
     assert isinstance(body["actions"], list)
     assert isinstance(body["supporting_context"], list)
     assert body["module_key"] == "problem-statement"
+
+
+def test_in_memory_retriever_covers_vercel_v1_modules() -> None:
+    retriever = InMemoryRetriever()
+
+    assert retriever.search(query="probleme", module="problem_statement", limit=1)
+    assert retriever.search(query="interview", module="interview", limit=1)
+    assert retriever.search(query="sprint", module="sprints", limit=1)

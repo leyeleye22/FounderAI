@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     rag_dir: Path = Field(default=Path(".rag").resolve(), alias="FOUNDER_AI_RAG_DIR")
     rag_collection: str = Field(default="founderai_knowledge", alias="FOUNDER_AI_RAG_COLLECTION")
     embedding_model: str = Field(default="sentence-transformers/all-MiniLM-L6-v2", alias="FOUNDER_AI_EMBEDDING_MODEL")
+    force_in_memory_retrieval: bool = Field(default=False, alias="FOUNDER_AI_FORCE_IN_MEMORY_RETRIEVAL")
 
     # LLM settings
     llm_api_base_url: str | None = Field(default=None, alias="LLM_API_BASE_URL")

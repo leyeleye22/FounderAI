@@ -48,6 +48,9 @@ def get_interview_analyst() -> InterviewAnalystAgent:
 @lru_cache(maxsize=1)
 def get_retriever() -> BaseRetriever:
     settings = get_settings()
+    if settings.force_in_memory_retrieval:
+        return InMemoryRetriever()
+
     chroma_store = ChromaStore(
         persist_directory=Path(settings.rag_dir),
         collection_name=settings.rag_collection,

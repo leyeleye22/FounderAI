@@ -68,6 +68,7 @@ Use at least:
 - `FOUNDER_AI_PORT`
 - `FOUNDER_AI_MODEL_DIR`
 - `FOUNDER_AI_RAG_DIR`
+- `FOUNDER_AI_FORCE_IN_MEMORY_RETRIEVAL`
 - `FOUNDERPATH_API_BASE_URL`
 - `FOUNDERPATH_API_TOKEN`
 - `FOUNDER_AI_USE_LOCAL_HEURISTICS`
@@ -194,3 +195,20 @@ This gives you a clean path:
 - ship API now
 - train and improve the model later
 - deploy model updates without redesigning the system
+
+## Vercel V1 Mode
+
+When you need a fast V1 on Vercel before moving to a VPS:
+
+- deploy this repository to Vercel as a Python project
+- use `api/index.py` as the runtime entrypoint
+- set `FOUNDER_AI_BASE_URL` in the Next proxy to `https://<your-founder-ai>.vercel.app/api`
+- set `FOUNDER_AI_FORCE_IN_MEMORY_RETRIEVAL=true`
+- keep `USE_FINETUNED_MODEL=false`
+- keep `FOUNDER_AI_USE_LOCAL_HEURISTICS=true` unless you connect a remote `LLM_API_BASE_URL`
+
+Important for Vercel:
+
+- `requirements.txt` is intentionally lightweight for the serverless runtime
+- retrieval extras live in `requirements.retrieval.txt`
+- local model serving should wait for your future Hostinger VPS target

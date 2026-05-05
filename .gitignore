@@ -8,6 +8,7 @@ __pycache__/
 .coverage
 .coverage.*
 htmlcov/
+.vercel/
 .env
 .env.*
 !.env.example
