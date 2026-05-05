@@ -158,6 +158,7 @@ If your local PC does not have enough GPU or RAM, use the Colab notebook:
 
 What this setup changes compared with the local script:
 
+- the notebook is standalone: dataset + helper scripts are embedded directly in the notebook
 - uses a Hugging Face model id instead of a local Windows path
 - uses 4-bit QLoRA by default
 - uses a shorter sequence length (`512`) to fit smaller Colab GPUs
